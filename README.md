@@ -14,4 +14,4 @@ Functionality 2 - World 1
 
 Bonus - more worlds (~3-5 levels)
 
-![image](https://wireframe.cc/63oziV)
+![image](https://wireframe.cc/pro/pp/ff049aed9429106)

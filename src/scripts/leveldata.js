@@ -49,11 +49,11 @@ export const LevelData = [
         },
         // world 1 level 2
         {
-            playerStartPos:[100,100],
+            playerStartPos:[100,300],
             interactables: [
                 {
                     x: 80,
-                    y: 360,
+                    y: 460,
                     height: 5,
                     width: 160,
                     imgUrl:'dist/images/smallPlatform.png',
@@ -62,7 +62,7 @@ export const LevelData = [
                 },
                 {
                     x: 400,
-                    y: 360,
+                    y: 460,
                     height: 5,
                     width: 50,
                     imgUrl:'dist/images/tinyPlatform.png',
@@ -71,7 +71,7 @@ export const LevelData = [
                 },
                 {
                     x: 680,
-                    y: 360,
+                    y: 460,
                     height: 5,
                     width: 50,
                     imgUrl:'dist/images/tinyPlatform.png',
@@ -80,7 +80,7 @@ export const LevelData = [
                 },
                 {
                     x: 660,
-                    y: 240,
+                    y: 340,
                     height: 5,
                     width: 50,
                     imgUrl:'dist/images/tinyPlatform.png',
@@ -88,16 +88,43 @@ export const LevelData = [
                     imgHeight: 16
                 },
                 {
-                    x: 200,
-                    y: 100,
+                    x: 380,
+                    y: 280,
                     height: 5,
                     width: 100,
-                    imgUrl:'',
+                    imgUrl:'dist/images/smallPlatform.png',
                     yOffset: 18,
                     imgHeight: 20
-                }
+                },
+                {
+                    x: 660,
+                    y: 160,
+                    height: 5,
+                    width: 50,
+                    imgUrl:'dist/images/tinyPlatform.png',
+                    yOffset: 14,
+                    imgHeight: 16
+                },
+                {
+                    x: 320,
+                    y: 110,
+                    height: 5,
+                    width: 160,
+                    imgUrl:'dist/images/mediumPlatform.png',
+                    yOffset: 18,
+                    imgHeight: 20
+                },
+                {
+                    x: 60,
+                    y: 110,
+                    height: 5,
+                    width: 220,
+                    imgUrl:'dist/images/largePlatform.png',
+                    yOffset: 18,
+                    imgHeight: 20
+                },
             ],
-            finishPos: [50,50],
+            finishPos: [100,54],
             gravity: -0.1
         },
         // world 1 level 3

@@ -75,7 +75,7 @@ export default class Game {
 
         // player movement sounds
         this.jumpSound = new Audio('dist/audio/jumpSound.mp3')
-        this.jumpSound.volume = 0.8;
+        this.jumpSound.volume = 0.6;
         this.footstep = new Audio('dist/audio/footstep.mp3')
         this.footstep.volume = 0.6;
 

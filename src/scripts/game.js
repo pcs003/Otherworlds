@@ -15,7 +15,9 @@ import PortalFrame7 from '../assets/PortalFrame7.png'
 import PortalFrame8 from '../assets/PortalFrame8.png'
 
 import World1Door from '../assets/World1Door.png'
-import World1Music from '../assets/wordl1Music.mp3'
+import World1Music from '../assets/world1Music.mp3'
+import jumpSound from '../assets/jumpSound.mp3'
+import footstep from '../assets/footstep.mp3'
 
 import largePlatform from '../assets/largePlatform.png'
 import mediumPlatform from '../assets/mediumPlatform.png'
@@ -39,8 +41,6 @@ export default class Game {
         this.levelNum = levelNum;
         this.game = game;
         this.renderHome = renderHome;
-
-        this.music = new Audio('dist/audio/world1Music.mp3');
 
         this.frameNum = 0;
         this.levelTime = 6000;
@@ -73,6 +73,11 @@ export default class Game {
             collisionsurfaceY: 0
         }
 
+        // player movement sounds
+        this.jumpSound = new Audio('dist/audio/jumpSound.mp3')
+        this.footstep = new Audio('dist/audio/footstep.mp3')
+        this.footstep.volume = 0.1;
+
         this.playerSprite = new Image();
 
         this.portalFrame = 0;
@@ -101,6 +106,7 @@ export default class Game {
                 this.Player.moving = true;
                 this.Player.faceRight = false;
             } else if (event.key == ' ' && this.Player.grounded && !this.Player.isJumping ) {
+                this.jumpSound.play();
                 this.Player.velocity[1] -= 5;
                 this.Player.isJumping = true;
                 this.Player.grounded = false;
@@ -240,7 +246,7 @@ export default class Game {
             // handle player frame image
             if (this.Player.moving) {
                 if (this.Player.grounded) {
-                    
+                    this.footstep.play();
                     var currFrame = Math.floor(this.Player.frameNum / 10)
                     if (this.Player.faceRight) { 
                         if (currFrame == 0 || currFrame == 2) {

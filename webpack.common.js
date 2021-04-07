@@ -62,8 +62,8 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     name: "[name].[ext]",
-                    outputPath: "audio/",
-                    publicPath: "audio/",
+                    outputPath: "/audio/",
+                    publicPath: "/audio/",
                 },
             },
         ],

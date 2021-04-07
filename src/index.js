@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.height = 500;
     let gameFrame = 0;
 
+
     new HomePage(canvas, ctx).render();
 
     

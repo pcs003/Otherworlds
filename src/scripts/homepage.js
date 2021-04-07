@@ -12,9 +12,18 @@ export default class HomePage {
         this.game =  new Game(this.canvas, this.ctx, 1, 1, this.game, this.render.bind(this));
         this.home = null;
 
-        
+        this.music = new Audio();
+        this.music.src = 'dist/audio/world1Music.mp3';
+        this.music.volume = 0.6;
+        this.firstClick = true;
 
         this.canvas.addEventListener('mousedown', (event) => {
+
+            if (this.firstClick) {
+                this.music.play();
+                this.firstClick = false;
+            }
+
             let canvasPos = canvas.getBoundingClientRect();
             let mouseX = event.x - canvasPos.left;
             let mouseY = event.y - canvasPos.top;
@@ -32,6 +41,7 @@ export default class HomePage {
     }
 
     render() {
+        
         this.home = setInterval(() => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.canvas.style.backgroundImage = "url('dist/images/mainpage_bg.png')"

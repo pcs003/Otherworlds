@@ -1,5 +1,5 @@
 const BUFFER_X = 17;
-const BUFFER_Y = 31;
+const BUFFER_Y = 30;
 
 export default class Interactable {
     constructor(canvas, ctx, x, y, height, width) {
@@ -19,7 +19,7 @@ export default class Interactable {
     }
 
     isCollidingY(xPos, yPos) {
-        if (yPos + BUFFER_Y > this.y && yPos - BUFFER_Y < this.y + this.height && xPos + BUFFER_X - 6 > this.x && xPos - BUFFER_X + 6 < this.x + this.width) {
+        if (yPos + BUFFER_Y > this.y && yPos < this.y + this.height && xPos + BUFFER_X - 6 > this.x && xPos - BUFFER_X + 6 < this.x + this.width) {
             return true;
         }
         return false

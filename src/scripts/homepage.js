@@ -4,13 +4,15 @@ import Game from './game';
 
 
 export default class HomePage {
-    constructor(canvas, ctx, game) {
+    constructor(canvas, ctx) {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.game = game;
+        this.currentWorld = 1;
+
+        this.game =  new Game(this.canvas, this.ctx, 1, 1, this.game, this.render.bind(this));
         this.home = null;
 
-        this.currentWorld = 1;
+        
 
         this.canvas.addEventListener('mousedown', (event) => {
             let canvasPos = canvas.getBoundingClientRect();
@@ -21,16 +23,14 @@ export default class HomePage {
                 let increment = i * 130;
                 if (mouseX > 100 + increment && mouseX < 165 + increment && mouseY > 345 && mouseY < 415) {
                     clearInterval(this.home)
-                    this.game = new Game(this.canvas, this.ctx, this.currentWorld, i + 1, this.game)
+                    this.game.setData(this.currentWorld, i + 1, this.game)
                     this.game.render();
                 }
             }
-            // if (mouseX > 100 && mouseX < 170 && mouseY > 345 && mouseY < 415) {
-                
-            // }
+
         })
     }
-    
+
     render() {
         this.home = setInterval(() => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

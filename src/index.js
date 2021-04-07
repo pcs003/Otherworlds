@@ -1,5 +1,6 @@
 import "./styles/index.scss";
 import HomePage from './scripts/homepage'
+import Game from "./scripts/game";
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -9,8 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.height = 500;
     let gameFrame = 0;
 
-    let game = "";
-    new HomePage(canvas, ctx, game).render();
+    new HomePage(canvas, ctx).render();
 
     
 

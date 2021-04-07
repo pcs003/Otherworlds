@@ -54,34 +54,43 @@ export const LevelData = [
                 {
                     x: 80,
                     y: 360,
-                    height: 30,
-                    width: 640,
-                    imgUrl:'',
+                    height: 5,
+                    width: 160,
+                    imgUrl:'dist/images/smallPlatform.png',
                     yOffset: 18,
                     imgHeight: 20
                 },
                 {
-                    x: 500,
-                    y: 300,
-                    height: 20,
-                    width: 100,
-                    imgUrl:'',
-                    yOffset: 18,
-                    imgHeight: 20
+                    x: 400,
+                    y: 360,
+                    height: 5,
+                    width: 50,
+                    imgUrl:'dist/images/tinyPlatform.png',
+                    yOffset: 14,
+                    imgHeight: 16
                 },
                 {
-                    x: 300,
-                    y: 200,
-                    height: 20,
-                    width: 100,
-                    imgUrl:'',
-                    yOffset: 18,
-                    imgHeight: 20
+                    x: 680,
+                    y: 360,
+                    height: 5,
+                    width: 50,
+                    imgUrl:'dist/images/tinyPlatform.png',
+                    yOffset: 14,
+                    imgHeight: 16
+                },
+                {
+                    x: 660,
+                    y: 240,
+                    height: 5,
+                    width: 50,
+                    imgUrl:'dist/images/tinyPlatform.png',
+                    yOffset: 14,
+                    imgHeight: 16
                 },
                 {
                     x: 200,
                     y: 100,
-                    height: 20,
+                    height: 5,
                     width: 100,
                     imgUrl:'',
                     yOffset: 18,

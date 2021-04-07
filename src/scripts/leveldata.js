@@ -129,38 +129,55 @@ export const LevelData = [
         },
         // world 1 level 3
         {
-            playerStartPos:[100,100],
+            playerStartPos:[100,300],
             interactables: [
                 {
                     x: 80,
-                    y: 360,
-                    height: 30,
-                    width: 640,
-                    imgUrl:''
-                },
-                {
-                    x: 500,
-                    y: 300,
-                    height: 20,
+                    y: 420,
+                    height: 5,
                     width: 100,
-                    imgUrl:''
-                },
-                {
-                    x: 300,
-                    y: 200,
-                    height: 20,
-                    width: 100,
-                    imgUrl:''
+                    imgUrl:'dist/images/smallPlatform.png',
+                    yOffset: 18,
+                    imgHeight: 20
                 },
                 {
                     x: 200,
-                    y: 100,
-                    height: 20,
-                    width: 100,
-                    imgUrl:''
+                    y:380,
+                    height: 5,
+                    width: 50,
+                    imgUrl:'dist/images/tinyPlatform.png',
+                    yOffset: 14,
+                    imgHeight: 16
+                },
+                {
+                    x: 280,
+                    y:360,
+                    height: 5,
+                    width: 50,
+                    imgUrl:'dist/images/tinyPlatform.png',
+                    yOffset: 14,
+                    imgHeight: 16
+                },
+                {
+                    x: 80,
+                    y:260,
+                    height: 5,
+                    width: 50,
+                    imgUrl:'dist/images/tinyPlatform.png',
+                    yOffset: 14,
+                    imgHeight: 16
+                },
+                {
+                    x: 220,
+                    y:140,
+                    height: 5,
+                    width: 50,
+                    imgUrl:'dist/images/tinyPlatform.png',
+                    yOffset: 14,
+                    imgHeight: 16
                 }
             ],
-            finishPos: [50,50],
+            finishPos: [700,400],
             gravity: -0.1
         },
         // world 1 level 4

@@ -1,5 +1,9 @@
 import BG from '../assets/mainpage_bg.png'
 import tabIcon from '../assets/tabIcon.png'
+
+import soundOn from '../assets/soundOn.png'
+import soundOff from '../assets/soundOff.png'
+
 import Game from './game';
 
 
@@ -16,14 +20,11 @@ export default class HomePage {
         this.music = new Audio();
         this.music.src = 'dist/audio/world1Music.mp3';
         this.music.volume = 0.6;
-        this.firstClick = true;
+
+        this.muted = true;
 
         this.canvas.addEventListener('mousedown', (event) => {
 
-            if (this.firstClick) {
-                this.music.play();
-                this.firstClick = false;
-            }
 
             let canvasPos = canvas.getBoundingClientRect();
             let mouseX = event.x - canvasPos.left;
@@ -38,7 +39,21 @@ export default class HomePage {
                 }
             }
 
+            if (mouseX > 730 && mouseX < 770 && mouseY > 30 && mouseY < 60) {
+                this.toggleMute();
+            }
         })
+    }
+
+    toggleMute() {
+        this.muted = !this.muted;
+
+        if (this.muted) {
+            this.music.pause();
+        } else {
+            this.music.currentTime = 0;
+            this.music.play();
+        }
     }
 
     render() {
@@ -64,6 +79,14 @@ export default class HomePage {
                 this.ctx.fillStyle = "rgb(0,0,0)"
                 this.ctx.fillText((i + 1).toString(), 120 + increment, 397)
             }
+
+            let soundButton = new Image();
+            if (this.muted) {
+                soundButton.src = 'dist/images/soundOff.png'
+            } else {
+                soundButton.src = 'dist/images/soundOn.png'
+            }
+            this.ctx.drawImage(soundButton, 730, 30, 40, 30);
 
         },10)
         

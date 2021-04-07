@@ -1,4 +1,5 @@
 import BG from '../assets/mainpage_bg.png'
+import tabIcon from '../assets/tabIcon.png'
 import Game from './game';
 
 

@@ -36,7 +36,7 @@ import InteractableImage from './interactableImage'
 import LevelText from './levelText'
 
 export default class Game {
-    constructor(canvas, ctx, worldNum, levelNum, game, renderHome, gameMusic, muted, toggleMute) {
+    constructor(canvas, ctx, worldNum, levelNum, game, renderHome, gameMusic, musicMuted, toggleSoundMuted, getSoundMuted, toggleMusicMuted) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.worldNum = worldNum;
@@ -44,13 +44,15 @@ export default class Game {
         this.game = game;
         this.renderHome = renderHome;
         this.gameMusic = gameMusic;
-        this.muted = muted;
-        this.toggleMute = toggleMute;
+        this.musicMuted = musicMuted;
+        this.toggleSoundMuted = toggleSoundMuted;
+        this.getSoundMuted = getSoundMuted;
+        this.toggleMusicMuted = toggleMusicMuted;
 
         this.frameNum = 0;
         this.levelTime = 6000;
         this.paused = false;
-        this.menu = new GameMenu(this.canvas, this.ctx, "failed",this.worldNum, this.levelNum, this.game, this.setData.bind(this), this.togglePause.bind(this), this.render.bind(this), this.renderHome, this.gameMusic, this.muted, this.toggleMute);
+        this.menu = new GameMenu(this.canvas, this.ctx, "failed",this.worldNum, this.levelNum, this.game, this.setData.bind(this), this.togglePause.bind(this), this.render.bind(this), this.renderHome, this.gameMusic, this.musicMuted, this.toggleSoundMuted, this.getSoundMuted, this.toggleSoundMuted);
         
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -125,7 +127,7 @@ export default class Game {
                 this.Player.moving = true;
                 this.Player.faceRight = false;
             } else if (event.key == ' ' && this.Player.grounded && !this.Player.isJumping ) {
-                this.jumpSound.play();
+                if (!this.getSoundMuted()) this.jumpSound.play();
                 this.Player.velocity[1] -= 5;
                 this.Player.isJumping = true;
                 this.Player.grounded = false;
@@ -135,7 +137,7 @@ export default class Game {
             } else if (event.key == "Escape") {
                 this.pauseSound.pause();
                 this.pauseSound.currentTime = 0;
-                this.pauseSound.play();
+                if (!this.getSoundMuted()) this.pauseSound.play();
                 this.togglePause();
             }
         })
@@ -361,7 +363,7 @@ export default class Game {
             // handle player frame image
             if (this.Player.moving) {
                 if (this.Player.grounded) {
-                    this.footstep.play();
+                    if (!this.getSoundMuted()) this.footstep.play();
                     var currFrame = Math.floor(this.Player.frameNum / 10)
                     if (this.Player.faceRight) { 
                         if (currFrame == 0 || currFrame == 2) {

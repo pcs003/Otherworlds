@@ -1,7 +1,8 @@
 import BG from '../assets/mainpage_bg.png'
 import tabIcon from '../assets/tabIcon.png'
 import world2BG from '../assets/world2BG.png'
-
+import musicOn from '../assets/musicOn.png'
+import musicOff from '../assets/musicOff.png'
 import soundOn from '../assets/soundOn.png'
 import soundOff from '../assets/soundOff.png'
 
@@ -14,10 +15,11 @@ export default class HomePage {
         this.canvas = canvas;
         this.ctx = ctx;
         this.currentWorld = 1;
-        this.muted = true;
+        this.soundMuted = true;
+        this.musicMuted = true;
         this.numWorlds = 2;
 
-        this.game =  new Game(this.canvas, this.ctx, 1, 1, this.game, this.render.bind(this), this.music, this.muted, this.toggleMute.bind(this));
+        this.game =  new Game(this.canvas, this.ctx, 1, 1, this.game, this.render.bind(this), this.music, this.soundMuted, this.toggleMuteSound.bind(this), this.getSoundMuted.bind(this), this.toggleMuteMusic.bind(this));
         this.home = null;
 
         this.music = new Audio();
@@ -46,7 +48,11 @@ export default class HomePage {
             }
 
             if (mouseX > 730 && mouseX < 770 && mouseY > 30 && mouseY < 60) {
-                this.toggleMute();
+                this.toggleMuteMusic();
+            }
+
+            if (mouseX > 660 && mouseX < 700 && mouseY > 30 && mouseY < 60) {
+                this.toggleMuteSound();
             }
 
             if (mouseY < 270 && mouseY > 240) {
@@ -68,15 +74,24 @@ export default class HomePage {
         })
     }
 
-    toggleMute() {
-        this.muted = !this.muted;
+    toggleMuteMusic() {
+        this.musicMuted = !this.musicMuted;
 
-        if (this.muted) {
+        if (this.musicMuted) {
             this.music.pause();
         } else {
             this.music.currentTime = 0;
             this.music.play();
         }
+    }
+
+    getSoundMuted() {
+        return this.soundMuted;
+    }
+
+    toggleMuteSound() {
+        
+        this.soundMuted = !this.soundMuted;
     }
 
     render() {
@@ -144,13 +159,23 @@ export default class HomePage {
                 this.ctx.fillText((i + 1).toString(), 120 + increment, 397)
             }
 
+            // mute sound button
             let soundButton = new Image();
-            if (this.muted) {
+            if (this.soundMuted) {
                 soundButton.src = 'dist/images/soundOff.png'
             } else {
                 soundButton.src = 'dist/images/soundOn.png'
             }
-            this.ctx.drawImage(soundButton, 730, 30, 40, 30);
+            this.ctx.drawImage(soundButton, 660, 30, 40, 30);
+
+            //mute music button
+            let musicButton = new Image();
+            if (this.musicMuted) {
+                musicButton.src = 'dist/images/musicOff.png'
+            } else {
+                musicButton.src = 'dist/images/musicOn.png'
+            }
+            this.ctx.drawImage(musicButton, 730, 30, 40, 30);
 
         },10)
         

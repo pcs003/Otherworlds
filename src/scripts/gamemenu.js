@@ -36,7 +36,7 @@ export default class GameMenu {
         this.menuBlip = new Audio('dist/audio/menuBlip.mp3');
         this.pause = new Audio('dist/audio/pause.mp3')
         this.menuBlip.volume = 0.1;
-        this.pause.volume = 0.01;
+        this.pause.volume = 0.2;
 
         this.selected = 1;
         this.submitted = false;
@@ -57,6 +57,8 @@ export default class GameMenu {
                     this.render();
                 }
             } else if (event.key == 'Enter') {
+                this.pause.pause();
+                this.pause.currentTime = 0;
                 this.pause.play();
                 this.submitted = true;
             } else if (event.key == "Escape" && this.type == "pause") {
@@ -164,7 +166,7 @@ export default class GameMenu {
 
         // mute button setup
         this.ctx.fillStyle = "#ffffff";
-        console.log(this.muted)
+
         if (this.type == "pause") {
             if (this.muted) {
                 this.ctx.drawImage(this.soundOff, 540, 130, 30, 20);

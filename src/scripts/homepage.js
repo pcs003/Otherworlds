@@ -89,6 +89,13 @@ export default class HomePage {
             this.ctx.fillStyle = '#ffffff';
             this.ctx.font = "32px 'Press Start 2P'"
             this.ctx.fillText('Otherworlds', 225, 90)
+
+            //controls
+            this.ctx.font = "14px 'Press Start 2P'"
+            this.ctx.fillText('WASD - Move', 323, 140)
+            this.ctx.fillText('Space - Jump', 309, 170)
+            this.ctx.fillText('Esc - Pause', 337, 200)
+
     
             // world select      
             // --world name

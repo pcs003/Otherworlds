@@ -79,6 +79,7 @@ export default class Game {
         }
 
         this.pauseSound = new Audio('dist/audio/pause.mp3')
+        this.pauseSound.volume = 0.2;
 
         // player movement sounds
         this.jumpSound = new Audio('dist/audio/jumpSound.mp3')
@@ -324,15 +325,13 @@ export default class Game {
     }
 
     pauseGame(gameLoop) {
-        console.log(this.menu)
         clearInterval(gameLoop)
         this.menu.setMenuData("pause",this.worldNum, this.levelNum);
         this.menu.open();
     }
     
     render(skip = false){
-        if (this.levelText != "" && !skip) {
-            console.log(skip)
+        if (this.levelText != "" && !skip) {    
             this.levelText.open()
         }
         this.canvas.style.backgroundImage = `url(${this.worldBGs[this.worldNum - 1]})`

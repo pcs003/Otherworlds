@@ -50,16 +50,18 @@ export default class HomePage {
             }
 
             if (mouseY < 270 && mouseY > 240) {
-                console.log("here1")
                 if (mouseX < 240 && mouseX > 210) {
                     if (this.currentWorld > 1) {
                         this.currentWorld--;
+                    } else {
+                        this.currentWorld = this.numWorlds;
                     }
                 }
                 if (mouseX < 590 && mouseX > 560) {
-                    console.log("here2")
                     if (this.currentWorld < this.numWorlds) {
                         this.currentWorld++;
+                    } else {
+                        this.currentWorld = 1;
                     }
                 }
             }

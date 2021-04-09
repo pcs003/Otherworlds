@@ -32,6 +32,7 @@ import Exit from './exit'
 
 import { LevelData } from './leveldata'
 import InteractableImage from './interactableImage'
+import LevelText from './levelText'
 
 export default class Game {
     constructor(canvas, ctx, worldNum, levelNum, game, renderHome, gameMusic, muted, toggleMute) {
@@ -90,7 +91,7 @@ export default class Game {
         this.portalSprite = new Image();
 
         // set exit location
-        this.exit = new Exit(this.canvas, this.ctx, this.levelData.finishPos[0],this.levelData.finishPos[1],50,50, this.levelNum, this.worldNum);
+        this.exit = new Exit(this.canvas, this.ctx, this.levelData.finishPos[0],this.levelData.finishPos[1],70,70, this.levelNum, this.worldNum);
 
         // set interactables for this stage from seed data
         this.interactables = [];
@@ -101,6 +102,11 @@ export default class Game {
                 this.images.push(new InteractableImage(this.canvas, this.ctx, interactable.imgUrl,interactable.x,interactable.y - interactable.yOffset,interactable.width,interactable.imgHeight));
             }
         })
+
+        this.levelText = "";
+        if (this.levelData.levelText) {
+            this.levelText = new LevelText(this.canvas, this.ctx, this.levelData.levelText, 160,200)
+        }
 
         window.addEventListener('keydown', event => {
             if (event.key == 'd') {
@@ -192,6 +198,11 @@ export default class Game {
                 this.images.push(new InteractableImage(this.canvas, this.ctx, interactable.imgUrl,interactable.x,interactable.y - interactable.yOffset,interactable.width,interactable.imgHeight));
             }
         })
+
+        this.levelText = "";
+        if (this.levelData.levelText) {
+            this.levelText = new LevelText(this.canvas, this.ctx, this.levelData.levelText, 160,200)
+        }
     }
 
     
@@ -199,7 +210,7 @@ export default class Game {
         this.paused = !this.paused;
         
         if (this.paused == false) {
-            this.render();
+            this.render(true);
         }
     }
 
@@ -215,10 +226,87 @@ export default class Game {
     }
 
     levelComplete(gameLoop) {
-        this.interactables = [];
         clearInterval(gameLoop);
-        this.menu.setMenuData("complete",this.worldNum, this.levelNum);
-        this.menu.open();
+        setTimeout( () => {
+            this.interactables = [];
+            clearInterval(finishWorld)
+            this.menu.setMenuData("complete",this.worldNum, this.levelNum);
+            this.menu.open();
+        }, 4000)
+        let count = 0;
+        let exitX = 500;
+        let exitY = 180;
+        let exitW = 60;
+        let exitH = 80;
+        let finishWorld = setInterval(() => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            count++;
+
+            // draw exit
+            
+            if (count < 100) {
+                exitX += 0.6;
+                exitY -= 0.4;
+                this.exit.render(count, exitX, exitY, exitW, exitH);
+            } else if (count < 200) {
+                exitX -= 0.3;
+                exitY -= 0.4;
+                exitW += 0.6;
+                exitH += 0.8;
+                this.exit.render(count, exitX, exitY, exitW, exitH);
+            } else {
+                this.exit.render(count, 530, 100, 120, 160);
+            }
+            
+
+            // draw images
+            this.images.forEach(image => {
+                image.render();
+            })
+
+            // draw interactables 
+            this.interactables.forEach(interactable => {
+                interactable.render();
+            })
+
+            if (count < 100) {
+                if (count % 40 > 20) {
+                    this.playerSprite.src = "dist/images/idleFrame.png"
+                } else {
+                    this.playerSprite.src = "dist/images/idleFrame2.png"
+                }
+            } else if (count < 200) {
+                this.playerSprite.src = "dist/images/runRightFrame1.png"
+            } else {
+                this.playerSprite.src = "dist/images/runRightFrame2.png"
+            }
+
+            if (count >= 200 && count < 225) {
+                this.Player.x += 1;
+                this.Player.y -= 2;
+                
+            } else if (count >= 200 && count < 250) {
+                this.Player.x += 1;
+                this.Player.y -= 1;
+            } else if (count >= 200 && count < 275) {
+                this.Player.x += 1;
+                this.Player.y -= 0.5;
+            } else if (count >= 200 && count < 300) {
+                this.Player.x += 1;
+            } else if (count >= 200 && count < 325) {
+                this.Player.x += 1;
+                this.Player.y += 0.5;
+            }
+            if (count >= 300) {
+                this.Player.width -= 0.3;
+                this.Player.height -= 0.5;
+                this.Player.x += 0.15;
+                this.Player.y += 0.25;
+            }
+            this.drawPlayer(this.playerSprite, this.Player.x, this.Player.y, this.Player.width, this.Player.height)
+        }, 10)
+        
+        
     }
 
     pauseGame(gameLoop) {
@@ -228,7 +316,11 @@ export default class Game {
         this.menu.open();
     }
     
-    render(){
+    render(skip = false){
+        if (this.levelText != "" && !skip) {
+            console.log(skip)
+            this.levelText.open()
+        }
         const gameLoop = setInterval(() => {
             if (this.paused) {
                 this.pauseGame(gameLoop);

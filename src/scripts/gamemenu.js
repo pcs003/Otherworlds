@@ -35,6 +35,8 @@ export default class GameMenu {
 
         this.menuBlip = new Audio('dist/audio/menuBlip.mp3');
         this.pause = new Audio('dist/audio/pause.mp3')
+        this.menuBlip.volume = 0.1;
+        this.pause.volume = 0.01;
 
         this.selected = 1;
         this.submitted = false;

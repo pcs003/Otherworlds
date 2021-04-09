@@ -36,3 +36,17 @@ body {
 #canvas-menu.active {
     display: block;
 }
+
+#canvas-text {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: Calc(50% - 400px);
+    width: 800px;
+    height: 500px;
+    z-index: 5;
+}
+
+#canvas-text.active {
+    display: block;
+}

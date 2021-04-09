@@ -13,15 +13,16 @@ export default class HomePage {
         this.canvas = canvas;
         this.ctx = ctx;
         this.currentWorld = 1;
+        this.muted = true;
 
-        this.game =  new Game(this.canvas, this.ctx, 1, 1, this.game, this.render.bind(this));
+        this.game =  new Game(this.canvas, this.ctx, 1, 1, this.game, this.render.bind(this), this.music, this.muted, this.toggleMute.bind(this));
         this.home = null;
 
         this.music = new Audio();
         this.music.src = 'dist/audio/world1Music.mp3';
         this.music.volume = 0.6;
 
-        this.muted = true;
+        
 
         this.canvas.addEventListener('mousedown', (event) => {
 

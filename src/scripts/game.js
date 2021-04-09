@@ -34,18 +34,21 @@ import { LevelData } from './leveldata'
 import InteractableImage from './interactableImage'
 
 export default class Game {
-    constructor(canvas, ctx, worldNum, levelNum, game, renderHome) {
+    constructor(canvas, ctx, worldNum, levelNum, game, renderHome, gameMusic, muted, toggleMute) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.worldNum = worldNum;
         this.levelNum = levelNum;
         this.game = game;
         this.renderHome = renderHome;
+        this.gameMusic = gameMusic;
+        this.muted = muted;
+        this.toggleMute = toggleMute;
 
         this.frameNum = 0;
         this.levelTime = 6000;
         this.paused = false;
-        this.menu = new GameMenu(this.canvas, this.ctx, "failed",this.worldNum, this.levelNum, this.game, this.setData.bind(this), this.togglePause.bind(this), this.render.bind(this), this.renderHome);
+        this.menu = new GameMenu(this.canvas, this.ctx, "failed",this.worldNum, this.levelNum, this.game, this.setData.bind(this), this.togglePause.bind(this), this.render.bind(this), this.renderHome, this.gameMusic, this.muted, this.toggleMute);
         
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -72,6 +75,8 @@ export default class Game {
             grounded: false,
             collisionsurfaceY: 0
         }
+
+        this.pauseSound = new Audio('dist/audio/pause.mp3')
 
         // player movement sounds
         this.jumpSound = new Audio('dist/audio/jumpSound.mp3')
@@ -115,6 +120,9 @@ export default class Game {
                     this.Player.isJumping = false
                 }, 60)
             } else if (event.key == "Escape") {
+                this.pauseSound.pause();
+                this.pauseSound.currentTime = 0;
+                this.pauseSound.play();
                 this.togglePause();
             }
         })
@@ -189,7 +197,7 @@ export default class Game {
     
     togglePause(){
         this.paused = !this.paused;
-
+        
         if (this.paused == false) {
             this.render();
         }

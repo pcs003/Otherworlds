@@ -15,6 +15,7 @@ import PortalFrame7 from '../assets/PortalFrame7.png'
 import PortalFrame8 from '../assets/PortalFrame8.png'
 
 import World1Door from '../assets/World1Door.png'
+import World2Door from '../assets/World2Door.png'
 import World1Music from '../assets/world1Music.mp3'
 import jumpSound from '../assets/jumpSound.mp3'
 import footstep from '../assets/footstep.mp3'
@@ -84,6 +85,11 @@ export default class Game {
         this.jumpSound.volume = 0.6;
         this.footstep = new Audio('dist/audio/footstep.mp3')
         this.footstep.volume = 0.6;
+
+        this.worldBGs = [
+            'dist/images/mainpage_bg.png',
+            'dist/images/world2BG.png',
+        ]
 
         this.playerSprite = new Image();
 
@@ -226,85 +232,93 @@ export default class Game {
     }
 
     levelComplete(gameLoop) {
-        clearInterval(gameLoop);
-        setTimeout( () => {
+        if (this.levelNum == 5) {
+            clearInterval(gameLoop);
+            setTimeout( () => {
+                this.interactables = [];
+                clearInterval(finishWorld)
+                this.menu.setMenuData("complete",this.worldNum, this.levelNum);
+                this.menu.open();
+            }, 4000)
+            let count = 0;
+            let exitX = 500;
+            let exitY = 180;
+            let exitW = 60;
+            let exitH = 80;
+            let finishWorld = setInterval(() => {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                count++;
+    
+                // draw exit
+                
+                if (count < 100) {
+                    exitX += 0.6;
+                    exitY -= 0.4;
+                    this.exit.render(count, exitX, exitY, exitW, exitH);
+                } else if (count < 200) {
+                    exitX -= 0.3;
+                    exitY -= 0.4;
+                    exitW += 0.6;
+                    exitH += 0.8;
+                    this.exit.render(count, exitX, exitY, exitW, exitH);
+                } else {
+                    this.exit.render(count, 530, 100, 120, 160);
+                }
+                
+    
+                // draw images
+                this.images.forEach(image => {
+                    image.render();
+                })
+    
+                // draw interactables 
+                this.interactables.forEach(interactable => {
+                    interactable.render();
+                })
+    
+                if (count < 100) {
+                    if (count % 40 > 20) {
+                        this.playerSprite.src = "dist/images/idleFrame.png"
+                    } else {
+                        this.playerSprite.src = "dist/images/idleFrame2.png"
+                    }
+                } else if (count < 200) {
+                    this.playerSprite.src = "dist/images/runRightFrame1.png"
+                } else {
+                    this.playerSprite.src = "dist/images/runRightFrame2.png"
+                }
+    
+                if (count >= 200 && count < 225) {
+                    this.Player.x += 1;
+                    this.Player.y -= 2;
+                    
+                } else if (count >= 200 && count < 250) {
+                    this.Player.x += 1;
+                    this.Player.y -= 1;
+                } else if (count >= 200 && count < 275) {
+                    this.Player.x += 1;
+                    this.Player.y -= 0.5;
+                } else if (count >= 200 && count < 300) {
+                    this.Player.x += 1;
+                } else if (count >= 200 && count < 325) {
+                    this.Player.x += 1;
+                    this.Player.y += 0.5;
+                }
+                if (count >= 300) {
+                    this.Player.width -= 0.3;
+                    this.Player.height -= 0.5;
+                    this.Player.x += 0.15;
+                    this.Player.y += 0.25;
+                }
+                this.drawPlayer(this.playerSprite, this.Player.x, this.Player.y, this.Player.width, this.Player.height)
+            }, 10)
+            
+        } else {
             this.interactables = [];
-            clearInterval(finishWorld)
+            clearInterval(gameLoop)
             this.menu.setMenuData("complete",this.worldNum, this.levelNum);
             this.menu.open();
-        }, 4000)
-        let count = 0;
-        let exitX = 500;
-        let exitY = 180;
-        let exitW = 60;
-        let exitH = 80;
-        let finishWorld = setInterval(() => {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            count++;
-
-            // draw exit
-            
-            if (count < 100) {
-                exitX += 0.6;
-                exitY -= 0.4;
-                this.exit.render(count, exitX, exitY, exitW, exitH);
-            } else if (count < 200) {
-                exitX -= 0.3;
-                exitY -= 0.4;
-                exitW += 0.6;
-                exitH += 0.8;
-                this.exit.render(count, exitX, exitY, exitW, exitH);
-            } else {
-                this.exit.render(count, 530, 100, 120, 160);
-            }
-            
-
-            // draw images
-            this.images.forEach(image => {
-                image.render();
-            })
-
-            // draw interactables 
-            this.interactables.forEach(interactable => {
-                interactable.render();
-            })
-
-            if (count < 100) {
-                if (count % 40 > 20) {
-                    this.playerSprite.src = "dist/images/idleFrame.png"
-                } else {
-                    this.playerSprite.src = "dist/images/idleFrame2.png"
-                }
-            } else if (count < 200) {
-                this.playerSprite.src = "dist/images/runRightFrame1.png"
-            } else {
-                this.playerSprite.src = "dist/images/runRightFrame2.png"
-            }
-
-            if (count >= 200 && count < 225) {
-                this.Player.x += 1;
-                this.Player.y -= 2;
-                
-            } else if (count >= 200 && count < 250) {
-                this.Player.x += 1;
-                this.Player.y -= 1;
-            } else if (count >= 200 && count < 275) {
-                this.Player.x += 1;
-                this.Player.y -= 0.5;
-            } else if (count >= 200 && count < 300) {
-                this.Player.x += 1;
-            } else if (count >= 200 && count < 325) {
-                this.Player.x += 1;
-                this.Player.y += 0.5;
-            }
-            if (count >= 300) {
-                this.Player.width -= 0.3;
-                this.Player.height -= 0.5;
-                this.Player.x += 0.15;
-                this.Player.y += 0.25;
-            }
-            this.drawPlayer(this.playerSprite, this.Player.x, this.Player.y, this.Player.width, this.Player.height)
-        }, 10)
+        }
         
         
     }
@@ -321,6 +335,7 @@ export default class Game {
             console.log(skip)
             this.levelText.open()
         }
+        this.canvas.style.backgroundImage = `url(${this.worldBGs[this.worldNum - 1]})`
         const gameLoop = setInterval(() => {
             if (this.paused) {
                 this.pauseGame(gameLoop);

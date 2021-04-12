@@ -374,7 +374,6 @@ export default class GameMenu {
                 this.ctx.fillStyle = "#ffffff";
                 this.ctx.fill();
             } else {
-                console.log(this.selected)
                 this.ctx.beginPath();
                 this.ctx.moveTo(234, 300);
                 this.ctx.lineTo(254, 290);

@@ -71,8 +71,13 @@ export default class HomePage {
                 }
             }
 
+            // uncomment for dev options
             if (mouseX > 0 && mouseX < 20 && mouseY > 0 && mouseY < 20) {
                 window.localStorage.setItem("levelsCompleted", 0);
+                this.render();
+            }
+            if (mouseX > 0 && mouseX < 20 && mouseY > 450 && mouseY < 500) {
+                window.localStorage.setItem("levelsCompleted", this.numWorlds * 5);
                 this.render();
             }
         })

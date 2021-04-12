@@ -323,7 +323,7 @@ export const LevelData = [
             ],
             finishPos: [500,180],
             gravity: -0.1,
-            levelText: "Now that spaceman has seen all that his world has to offer, he begins his journey through other worlds"
+            levelText: "Now that spaceman has seen all that his world has to offer, he begins his journey through otherworlds"
         }
 
     ],
@@ -352,13 +352,14 @@ export const LevelData = [
                     imgHeight: 20
                 },
                 {
-                    x: 300,
+                    x: 325,
                     y: 200,
                     height: 20,
-                    width: 100,
-                    imgUrl:'dist/images/world2SmallPlatform.png',
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
                     yOffset: 0,
-                    imgHeight: 20
+                    imgHeight: 20,
+                    weak: true
                 },
                 {
                     x: 80,
@@ -371,7 +372,8 @@ export const LevelData = [
                 }
             ],
             finishPos: [100,50],
-            gravity: -0.1
+            gravity: -0.1,
+            levelText: "Spaceman finds himself in an arid mountain world with stone platforms. Some of the platforms seem quite old..."
         },
     ]
 ]

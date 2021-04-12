@@ -29,6 +29,11 @@ import world2MediumPlatform from '../assets/world2MediumPlatform.png'
 import world2SmallPlatform from '../assets/world2SmallPlatform.png'
 import world2TinyPlatform from '../assets/world2TinyPlatform.png'
 
+import world2LargeWeakPlatform from '../assets/world2LargeWeakPlatform.png'
+import world2MediumWeakPlatform from '../assets/world2MediumWeakPlatform.png'
+import world2SmallWeakPlatform from '../assets/world2SmallWeakPlatform.png'
+import world2TinyWeakPlatform from '../assets/world2TinyWeakPlatform.png'
+
 import idleFrame from '../assets/idleFrame.png'
 import idleFrame2 from '../assets/idleFrame2.png'
 

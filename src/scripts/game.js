@@ -5,6 +5,7 @@ import Exit from './exit'
 import { LevelData } from './leveldata'
 import InteractableImage from './interactableImage'
 import LevelText from './levelText'
+import WeakPlatform from './weakPlatform'
 
 export default class Game {
     constructor(canvas, ctx, worldNum, levelNum, game, renderHome, gameMusic, musicMuted, toggleSoundMuted, getSoundMuted, toggleMusicMuted) {
@@ -173,10 +174,16 @@ export default class Game {
         this.interactables = [];
         this.images = [];
         this.levelData.interactables.forEach(interactable => {
-            this.interactables.push(new Interactable(this.canvas, this.ctx, interactable.x, interactable.y, interactable.height, interactable.width));
-            if (interactable.imgUrl.length > 0) {
-                this.images.push(new InteractableImage(this.canvas, this.ctx, interactable.imgUrl,interactable.x,interactable.y - interactable.yOffset,interactable.width,interactable.imgHeight));
+            if (interactable.weak) {
+                this.interactables.push(new WeakPlatform(this.canvas, this.ctx, interactable.x, interactable.y, interactable.height, interactable.width, 1000, interactable.imgUrl, this.GRAVITY));
+            } else {
+                this.interactables.push(new Interactable(this.canvas, this.ctx, interactable.x, interactable.y, interactable.height, interactable.width));
+                if (interactable.imgUrl.length > 0) {
+                    this.images.push(new InteractableImage(this.canvas, this.ctx, interactable.imgUrl,interactable.x,interactable.y - interactable.yOffset,interactable.width,interactable.imgHeight));
+                }
             }
+            
+            
         })
 
         this.levelText = "";
@@ -206,93 +213,17 @@ export default class Game {
     }
 
     levelComplete(gameLoop) {
+        // set new levelsCompleted localStorage variable
         let current = window.localStorage.getItem("levelsCompleted");
         if (current) {
             window.localStorage.setItem("levelsCompleted", parseInt(current) + 1);
         } else {
             window.localStorage.setItem("levelsCompleted", 1);
         }
-        console.log(window.localStorage.getItem("levelsCompleted"))
+
+        // animation at end of level 5
         if (this.levelNum == 5) {
-            clearInterval(gameLoop);
-            setTimeout( () => {
-                this.interactables = [];
-                clearInterval(finishWorld)
-                this.menu.setMenuData("complete",this.worldNum, this.levelNum);
-                this.menu.open();
-            }, 4000)
-            let count = 0;
-            let exitX = 500;
-            let exitY = 180;
-            let exitW = 60;
-            let exitH = 80;
-            let finishWorld = setInterval(() => {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                count++;
-    
-                // draw exit
-                
-                if (count < 100) {
-                    exitX += 0.6;
-                    exitY -= 0.4;
-                    this.exit.render(count, exitX, exitY, exitW, exitH);
-                } else if (count < 200) {
-                    exitX -= 0.3;
-                    exitY -= 0.4;
-                    exitW += 0.6;
-                    exitH += 0.8;
-                    this.exit.render(count, exitX, exitY, exitW, exitH);
-                } else {
-                    this.exit.render(count, 530, 100, 120, 160);
-                }
-                
-    
-                // draw images
-                this.images.forEach(image => {
-                    image.render();
-                })
-    
-                // draw interactables 
-                this.interactables.forEach(interactable => {
-                    interactable.render();
-                })
-    
-                if (count < 100) {
-                    if (count % 40 > 20) {
-                        this.playerSprite.src = "dist/images/idleFrame.png"
-                    } else {
-                        this.playerSprite.src = "dist/images/idleFrame2.png"
-                    }
-                } else if (count < 200) {
-                    this.playerSprite.src = "dist/images/runRightFrame1.png"
-                } else {
-                    this.playerSprite.src = "dist/images/runRightFrame2.png"
-                }
-    
-                if (count >= 200 && count < 225) {
-                    this.Player.x += 1;
-                    this.Player.y -= 2;
-                    
-                } else if (count >= 200 && count < 250) {
-                    this.Player.x += 1;
-                    this.Player.y -= 1;
-                } else if (count >= 200 && count < 275) {
-                    this.Player.x += 1;
-                    this.Player.y -= 0.5;
-                } else if (count >= 200 && count < 300) {
-                    this.Player.x += 1;
-                } else if (count >= 200 && count < 325) {
-                    this.Player.x += 1;
-                    this.Player.y += 0.5;
-                }
-                if (count >= 300) {
-                    this.Player.width -= 0.3;
-                    this.Player.height -= 0.5;
-                    this.Player.x += 0.15;
-                    this.Player.y += 0.25;
-                }
-                this.drawPlayer(this.playerSprite, this.Player.x, this.Player.y, this.Player.width, this.Player.height)
-            }, 10)
+            this.level5Animation(gameLoop);
             
         } else {
             this.interactables = [];
@@ -384,15 +315,22 @@ export default class Game {
             this.Player.grounded = false;
             this.interactables.forEach(interactable => {
                 interactable.render();
-    
                 if (interactable.isCollidingX(this.Player.x + this.Player.width/2 + this.Player.velocity[0], this.Player.y + this.Player.height/2 + this.Player.velocity[1])) {
                     this.Player.collidingX = true;
+                    // if (interactable instanceof WeakPlatform) {
+                    //     setTimeout(() => {
+                    //         interactable.fall();
+                    //     }, interactable.duration)
+                    // }
                 }
     
                 if (interactable.isCollidingY(this.Player.x + this.Player.width/2 + this.Player.velocity[0], this.Player.y + this.Player.height/2 + this.Player.velocity[1])) {
                     this.Player.collidingY = true;
                     this.Player.grounded = true;
                     this.Player.collisionsurfaceY = interactable.y;
+                    if (interactable instanceof WeakPlatform) {
+                        interactable.fall();
+                    }
                 }
             })
 
@@ -445,6 +383,90 @@ export default class Game {
         
     
         
+    }
+
+    // animations
+
+    level5Animation(gameLoop) {
+        clearInterval(gameLoop);
+        setTimeout( () => {
+            this.interactables = [];
+            clearInterval(finishWorld)
+            this.menu.setMenuData("complete",this.worldNum, this.levelNum);
+            this.menu.open();
+        }, 4000)
+        let count = 0;
+        let exitX = 500;
+        let exitY = 180;
+        let exitW = 60;
+        let exitH = 80;
+        let finishWorld = setInterval(() => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            count++;
+
+            // draw exit
+            
+            if (count < 100) {
+                exitX += 0.6;
+                exitY -= 0.4;
+                this.exit.render(count, exitX, exitY, exitW, exitH);
+            } else if (count < 200) {
+                exitX -= 0.3;
+                exitY -= 0.4;
+                exitW += 0.6;
+                exitH += 0.8;
+                this.exit.render(count, exitX, exitY, exitW, exitH);
+            } else {
+                this.exit.render(count, 530, 100, 120, 160);
+            }
+            
+
+            // draw images
+            this.images.forEach(image => {
+                image.render();
+            })
+
+            // draw interactables 
+            this.interactables.forEach(interactable => {
+                interactable.render();
+            })
+
+            if (count < 100) {
+                if (count % 40 > 20) {
+                    this.playerSprite.src = "dist/images/idleFrame.png"
+                } else {
+                    this.playerSprite.src = "dist/images/idleFrame2.png"
+                }
+            } else if (count < 200) {
+                this.playerSprite.src = "dist/images/runRightFrame1.png"
+            } else {
+                this.playerSprite.src = "dist/images/runRightFrame2.png"
+            }
+
+            if (count >= 200 && count < 225) {
+                this.Player.x += 1;
+                this.Player.y -= 2;
+                
+            } else if (count >= 200 && count < 250) {
+                this.Player.x += 1;
+                this.Player.y -= 1;
+            } else if (count >= 200 && count < 275) {
+                this.Player.x += 1;
+                this.Player.y -= 0.5;
+            } else if (count >= 200 && count < 300) {
+                this.Player.x += 1;
+            } else if (count >= 200 && count < 325) {
+                this.Player.x += 1;
+                this.Player.y += 0.5;
+            }
+            if (count >= 300) {
+                this.Player.width -= 0.3;
+                this.Player.height -= 0.5;
+                this.Player.x += 0.15;
+                this.Player.y += 0.25;
+            }
+            this.drawPlayer(this.playerSprite, this.Player.x, this.Player.y, this.Player.width, this.Player.height)
+        }, 10)
     }
     
 }

@@ -22,8 +22,7 @@ export default class LevelText {
         let count = 0;
         let segment = [];
         for (let i = 0; i < len; i++) {
-            count++;
-            count += words[0].length;
+            count += words[i].length;
             if (count <= 30) {
                 segment.push(words[i]);
             } else {
@@ -32,8 +31,10 @@ export default class LevelText {
                 count = 0;
                 i--;
             }
+            count++;
         }
         this.segments.push(segment)
+        this.y = this.canvas.height/2 - this.segments.length * 8;
     }
 
     fadeIn() {
@@ -42,7 +43,7 @@ export default class LevelText {
             this.render();
             setTimeout(() => {
                 this.fadeOut();
-            }, 2000)
+            }, 3000)
         }, 1000)
         let count = 0;
         let fadeInLoop = setInterval(() => {
@@ -94,9 +95,10 @@ export default class LevelText {
         this.ctx.font = "16px 'Press Start 2P'"
 
         
-        
         for (let i = 0; i < this.segments.length; i++ ) {
-            this.ctx.fillText(this.segments[i].join(" "), this.x, this.y + (i * 30), 480)
+            let line = this.segments[i].join(" ")
+            let offset = (480 - line.length * 16)/2;
+            this.ctx.fillText(line, this.x + offset, this.y + (i * 30), 480);
         }
             
     }

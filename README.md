@@ -14,9 +14,9 @@ Functionality 1 - Main Character sprite + movement, Game Physics
 * gravity works for jumping and platforms break fall
 
 Functionality 2 - World 1
-* first world 3 levels long
+* first world 5 levels long
 
-Bonus - more worlds (~3-5 levels)
+Bonus - more worlds (5 levels each)
 
 ## Wireframes
 

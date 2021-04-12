@@ -1,10 +1,6 @@
 import Game from "./game";
 import HomePage from "./homepage";
 
-import menuBlip from '../assets/menuBlip.mp3'
-import pauseMenu from '../assets/pauseMenu.mp3'
-import pause from '../assets/pause.mp3'
-
 export default class GameMenu {
     constructor(mainCanvas, mainCtx, type, worldNum, levelNum, game, setData, unpause, renderGame, renderHome, gameMusic, musicMuted, toggleSoundMuted, getSoundMuted, toggleMusicMuted){
         this.mainCanvas = mainCanvas;
@@ -15,6 +11,8 @@ export default class GameMenu {
         this.ctx = this.canvas.getContext('2d')
         this.canvas.width = 800;
         this.canvas.height = 500;
+
+        this.active = false;
 
         this.type = type;
         this.worldNum = worldNum;
@@ -46,27 +44,30 @@ export default class GameMenu {
 
 
         window.addEventListener("keydown", event => {
-            if (event.key == 'w') {
-                if (this.selected != 1) {
-                    if (!this.getSoundMuted()) this.menuBlip.play();
-                    this.selected--;
-                    this.render();
+            if (this.active) {
+                if (event.key == 'w') {
+                    if (this.selected != 1) {
+                        if (!this.getSoundMuted()) this.menuBlip.play();
+                        this.selected--;
+                        this.render();
+                    }
+                } else if (event.key == 's') {
+                    let maxNum = this.type == "pause" ? 3 : 2;
+                    if (this.selected != maxNum) {
+                        if (!this.getSoundMuted()) this.menuBlip.play();
+                        this.selected++;
+                        this.render();
+                    }
+                } else if (event.key == 'Enter') {
+                    this.pause.pause();
+                    this.pause.currentTime = 0;
+                    if (!this.getSoundMuted()) this.pause.play();
+                    this.submitted = true;
+                } else if (event.key == "Escape" && this.type == "pause") {
+                    this.close();
                 }
-            } else if (event.key == 's') {
-                let maxNum = this.type == "pause" ? 3 : 2;
-                if (this.selected != maxNum) {
-                    if (!this.getSoundMuted()) this.menuBlip.play();
-                    this.selected++;
-                    this.render();
-                }
-            } else if (event.key == 'Enter') {
-                this.pause.pause();
-                this.pause.currentTime = 0;
-                if (!this.getSoundMuted()) this.pause.play();
-                this.submitted = true;
-            } else if (event.key == "Escape" && this.type == "pause") {
-                this.close();
             }
+            
         })
 
         this.canvas.addEventListener('mousedown', (event) => {
@@ -92,12 +93,14 @@ export default class GameMenu {
     }
 
     close() {
+        this.active = false;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.canvas.classList.remove("active")
         this.submitted = false;
     }
 
     open() {
+        this.active = true;
         this.canvas.classList.add("active")
         this.render();
         const menu = setInterval(() => {

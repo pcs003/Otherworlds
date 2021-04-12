@@ -329,44 +329,44 @@ export const LevelData = [
     ],
     // world 2
     [
-        // world 1 level 1
+        // world 2 level 1
         {
             playerStartPos:[100,300],
             interactables: [
                 {
                     x: 80,
                     y: 420,
-                    height: 5,
+                    height: 30,
                     width: 640,
-                    imgUrl: 'dist/images/largePlatform.png',
-                    yOffset: 25,
+                    imgUrl: 'dist/images/world2LargePlatform.png',
+                    yOffset: 0,
                     imgHeight: 30
                 },
                 {
                     x: 500,
                     y: 300,
-                    height: 5,
+                    height: 20,
                     width: 100,
-                    imgUrl:'dist/images/smallPlatform.png',
-                    yOffset: 18,
+                    imgUrl:'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
                     imgHeight: 20
                 },
                 {
                     x: 300,
                     y: 200,
-                    height: 5,
+                    height: 20,
                     width: 100,
-                    imgUrl:'dist/images/smallPlatform.png',
-                    yOffset: 18,
+                    imgUrl:'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
                     imgHeight: 20
                 },
                 {
                     x: 80,
                     y: 110,
-                    height: 5,
+                    height: 20,
                     width: 100,
-                    imgUrl:'dist/images/smallPlatform.png',
-                    yOffset: 18,
+                    imgUrl:'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
                     imgHeight: 20
                 }
             ],

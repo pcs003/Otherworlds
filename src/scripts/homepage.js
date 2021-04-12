@@ -1,14 +1,5 @@
-import BG from '../assets/mainpage_bg.png'
-import tabIcon from '../assets/tabIcon.png'
-import world2BG from '../assets/world2BG.png'
-import musicOn from '../assets/musicOn.png'
-import musicOff from '../assets/musicOff.png'
-import soundOn from '../assets/soundOn.png'
-import soundOff from '../assets/soundOff.png'
-
 import Game from './game';
-
-
+import assetImports from './assetImports'
 
 export default class HomePage {
     constructor(canvas, ctx) {
@@ -31,6 +22,11 @@ export default class HomePage {
             'dist/images/world2BG.png',
         ]
 
+        this.levelsCompleted = window.localStorage.getItem("levelsCompleted");
+        if (this.levelsCompleted == null) {
+            this.levelsCompleted = 0;
+        }
+
         this.canvas.addEventListener('mousedown', (event) => {
 
 
@@ -41,9 +37,12 @@ export default class HomePage {
             for (let i = 0; i < 5; i++) {
                 let increment = i * 130;
                 if (mouseX > 100 + increment && mouseX < 165 + increment && mouseY > 345 && mouseY < 415) {
-                    clearInterval(this.home)
-                    this.game.setData(this.currentWorld, i + 1, this.game)
-                    this.game.render();
+                    if (this.levelsCompleted >= (this.currentWorld - 1) * 5 + i) {
+                        clearInterval(this.home)
+                        this.game.setData(this.currentWorld, i + 1, this.game)
+                        this.game.render();
+                    }
+                    
                 }
             }
 
@@ -71,6 +70,11 @@ export default class HomePage {
                     }
                 }
             }
+
+            if (mouseX > 0 && mouseX < 20 && mouseY > 0 && mouseY < 20) {
+                window.localStorage.setItem("levelsCompleted", 0);
+                this.render();
+            }
         })
     }
 
@@ -94,8 +98,15 @@ export default class HomePage {
         this.soundMuted = !this.soundMuted;
     }
 
+    getLevelsCompleted() {
+        this.levelsCompleted = window.localStorage.getItem("levelsCompleted");
+        if (this.levelsCompleted == null) {
+            this.levelsCompleted = 0;
+        }
+    }
+
     render() {
-        
+        this.getLevelsCompleted();
         this.home = setInterval(() => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.canvas.style.backgroundImage = `url(${this.worldBGs[this.currentWorld - 1]})`
@@ -149,11 +160,15 @@ export default class HomePage {
 
             //level select - 130px between level
             for (let i = 0; i < 5; i++) {
+                let fillColor = "rgb(120,120,120)";
+                if ((this.currentWorld - 1) * 5 + i <= this.levelsCompleted) {
+                    fillColor = "rgb(240,240,240)";
+                }
                 let increment = i * 130;
 
-                this.ctx.fillStyle = "rgb(100,100,100)"
+                this.ctx.fillStyle = "rgb(80,80,80)"
                 this.ctx.fillRect(100 + increment,345,70,70)
-                this.ctx.fillStyle = "rgb(240,240,240)"
+                this.ctx.fillStyle = fillColor;
                 this.ctx.fillRect(105 + increment,350,60,60)
                 this.ctx.fillStyle = "rgb(0,0,0)"
                 this.ctx.fillText((i + 1).toString(), 120 + increment, 397)

@@ -10,8 +10,8 @@ export default class HomePage {
         this.musicMuted = true;
         this.numWorlds = 2;
 
-        this.deathCount = -1;
-        this.bestTime = -1
+        this.deathCount = 0;
+        this.bestTime = "--:--"
         this.showControls = false;
         this.levelFills = ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff']
 
@@ -42,8 +42,8 @@ export default class HomePage {
                 let increment = i * 130;
                 if (mouseX > 100 + increment && mouseX < 165 + increment && mouseY > 345 && mouseY < 415) {
                     if (this.levelsCompleted >= (this.currentWorld - 1) * 5 + i) {
-                        this.deathCount = window.localStorage.getItem(`${this.currentWorld}-${i + 1} death count`) || -1;
-                        this.bestTime = window.localStorage.getItem(`${this.currentWorld}-${i + 1} best time`) || -1;
+                        this.deathCount = window.localStorage.getItem(`${this.currentWorld}-${i + 1} death count`) || 0;
+                        this.bestTime = window.localStorage.getItem(`${this.currentWorld}-${i + 1} best time`)/100 || "--:--";
                         this.levelFills[i] = 'rgb(255,190,255)'
                     }
                     
@@ -61,8 +61,6 @@ export default class HomePage {
         this.canvas.addEventListener('mousemove', this.moveListener);
 
         this.clickListener = (event) => {
-
-
             let canvasPos = this.canvas.getBoundingClientRect();
             let mouseX = event.x - canvasPos.left;
             let mouseY = event.y - canvasPos.top;
@@ -107,23 +105,23 @@ export default class HomePage {
             }
 
             // uncomment for dev options
-            if (mouseX > 0 && mouseX < 20 && mouseY > 0 && mouseY < 20) {
-                window.localStorage.setItem("levelsCompleted", 0);
-                this.render();
-            }
-            if (mouseX > 0 && mouseX < 20 && mouseY > 450 && mouseY < 500) {
-                window.localStorage.setItem("levelsCompleted", this.numWorlds * 5);
-                this.render();
-            }
-            if (mouseX > 750 && mouseX < 800 && mouseY > 450 && mouseY < 500) {
-                console.log("here")
-                for (let i = 1; i <= this.numWorlds; i++) {
-                    for (let j = 1; j <= 5; j++) {
-                        window.localStorage.setItem(`${i}-${j} best time`, -1);
-                        window.localStorage.setItem(`${i}-${j} death count`, -1);
-                    }
-                }
-            }
+            // if (mouseX > 0 && mouseX < 20 && mouseY > 0 && mouseY < 20) {
+            //     window.localStorage.setItem("levelsCompleted", 0);
+            //     this.render();
+            // }
+            // if (mouseX > 0 && mouseX < 20 && mouseY > 450 && mouseY < 500) {
+            //     window.localStorage.setItem("levelsCompleted", this.numWorlds * 5);
+            //     this.render();
+            // }
+            // if (mouseX > 750 && mouseX < 800 && mouseY > 450 && mouseY < 500) {
+            //     console.log("here")
+            //     for (let i = 1; i <= this.numWorlds; i++) {
+            //         for (let j = 1; j <= 5; j++) {
+            //             window.localStorage.setItem(`${i}-${j} best time`, 0);
+            //             window.localStorage.setItem(`${i}-${j} death count`, 0);
+            //         }
+            //     }
+            // }
         }
         this.canvas.addEventListener('mousedown', this.clickListener);
     }
@@ -263,8 +261,8 @@ export default class HomePage {
 
             // stats
             this.ctx.font = "20px 'Press Start 2P'"
-            if (this.bestTime != -1) this.ctx.fillText(`Best Time: ${this.bestTime/100}`, 240, 160)
-            if (this.deathCount != -1) this.ctx.fillText(`Death Count: ${this.deathCount}`, 260, 200)
+            this.ctx.fillText(`Best Time: ${this.bestTime}`, 240, 160)
+            this.ctx.fillText(`Death Count: ${this.deathCount}`, 260, 200)
         },10)
         
     }

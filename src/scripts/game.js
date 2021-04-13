@@ -205,9 +205,38 @@ export default class Game {
         this.ctx.drawImage(img, x, y, width, height)
     }
 
+    incrementDeathCount() {
+        let deathCount = window.localStorage.getItem(`${this.worldNum}-${this.levelNum} death count`);
+        if (deathCount == null) {
+            window.localStorage.setItem(`${this.worldNum}-${this.levelNum} death count`, 1)
+        } else {
+            window.localStorage.setItem(`${this.worldNum}-${this.levelNum} death count`, parseInt(deathCount) + 1)
+        }
+    }
+
+    checkBestTime() {
+        let current = window.localStorage.getItem(`${this.worldNum}-${this.levelNum} best time`);
+        console.log(current)
+        console.log(this.levelTime)
+        if (current == null) {
+            window.localStorage.setItem(`${this.worldNum}-${this.levelNum} best time`, this.levelTime);
+            return true;
+        } else {
+            if (this.levelTime > current) {
+                window.localStorage.setItem(`${this.worldNum}-${this.levelNum} best time`, this.levelTime);
+                return true;
+            }
+        }
+        return false;
+    }
+
     gameOver(gameLoop) {
         this.interactables = [];
         clearInterval(gameLoop);
+
+        this.incrementDeathCount();
+
+
         this.menu.setMenuData("failed",this.worldNum, this.levelNum);
         this.menu.open();
     }
@@ -228,7 +257,8 @@ export default class Game {
         } else {
             this.interactables = [];
             clearInterval(gameLoop)
-            this.menu.setMenuData("complete",this.worldNum, this.levelNum);
+            let newBest = this.checkBestTime();
+            this.menu.setMenuData("complete",this.worldNum, this.levelNum, newBest, this.levelTime);
             this.menu.open();
         }
         
@@ -392,7 +422,8 @@ export default class Game {
         setTimeout( () => {
             this.interactables = [];
             clearInterval(finishWorld)
-            this.menu.setMenuData("complete",this.worldNum, this.levelNum);
+            let newBest = this.checkBestTime();
+            this.menu.setMenuData("complete",this.worldNum, this.levelNum, newBest, this.levelTime);
             this.menu.open();
         }, 4000)
         let count = 0;

@@ -10,6 +10,11 @@ export default class HomePage {
         this.musicMuted = true;
         this.numWorlds = 2;
 
+        this.deathCount = -1;
+        this.bestTime = -1
+        this.showControls = false;
+        this.levelFills = ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff']
+
         this.game =  new Game(this.canvas, this.ctx, 1, 1, this.game, this.render.bind(this), this.music, this.soundMuted, this.toggleMuteSound.bind(this), this.getSoundMuted.bind(this), this.toggleMuteMusic.bind(this));
         this.home = null;
 
@@ -22,15 +27,43 @@ export default class HomePage {
             'dist/images/world2BG.png',
         ]
 
+        // get current number of levels completed
         this.levelsCompleted = window.localStorage.getItem("levelsCompleted");
         if (this.levelsCompleted == null) {
             this.levelsCompleted = 0;
         }
 
-        this.canvas.addEventListener('mousedown', (event) => {
+        this.moveListener = event => {
+            let canvasPos = this.canvas.getBoundingClientRect();
+            let mouseX = event.x - canvasPos.left;
+            let mouseY = event.y - canvasPos.top;
+
+            for (let i = 0; i < 5; i++) {
+                let increment = i * 130;
+                if (mouseX > 100 + increment && mouseX < 165 + increment && mouseY > 345 && mouseY < 415) {
+                    if (this.levelsCompleted >= (this.currentWorld - 1) * 5 + i) {
+                        this.deathCount = window.localStorage.getItem(`${this.currentWorld}-${i + 1} death count`) || -1;
+                        this.bestTime = window.localStorage.getItem(`${this.currentWorld}-${i + 1} best time`) || -1;
+                        this.levelFills[i] = 'rgb(255,190,255)'
+                    }
+                    
+                } else {
+                    this.levelFills[i] = '#ffffff'
+                }
+            }
+
+            if (mouseX > 0 && mouseX < 125 && mouseY > 0 && mouseY < 45) {
+                this.showControls = true;
+            } else {
+                this.showControls = false;
+            }
+        }
+        this.canvas.addEventListener('mousemove', this.moveListener);
+
+        this.clickListener = (event) => {
 
 
-            let canvasPos = canvas.getBoundingClientRect();
+            let canvasPos = this.canvas.getBoundingClientRect();
             let mouseX = event.x - canvasPos.left;
             let mouseY = event.y - canvasPos.top;
             
@@ -41,6 +74,8 @@ export default class HomePage {
                         clearInterval(this.home)
                         this.game.setData(this.currentWorld, i + 1, this.game)
                         this.game.render();
+                        // this.canvas.removeEventListener('mousedown', this.clickListener);
+                        // this.canvas.removeEventListener('mousemove', this.moveListener);
                     }
                     
                 }
@@ -54,7 +89,7 @@ export default class HomePage {
                 this.toggleMuteSound();
             }
 
-            if (mouseY < 270 && mouseY > 240) {
+            if (mouseY < 280 && mouseY > 250) {
                 if (mouseX < 240 && mouseX > 210) {
                     if (this.currentWorld > 1) {
                         this.currentWorld--;
@@ -80,7 +115,17 @@ export default class HomePage {
                 window.localStorage.setItem("levelsCompleted", this.numWorlds * 5);
                 this.render();
             }
-        })
+            if (mouseX > 750 && mouseX < 800 && mouseY > 450 && mouseY < 500) {
+                console.log("here")
+                for (let i = 1; i <= this.numWorlds; i++) {
+                    for (let j = 1; j <= 5; j++) {
+                        window.localStorage.setItem(`${i}-${j} best time`, -1);
+                        window.localStorage.setItem(`${i}-${j} death count`, -1);
+                    }
+                }
+            }
+        }
+        this.canvas.addEventListener('mousedown', this.clickListener);
     }
 
     toggleMuteMusic() {
@@ -110,7 +155,13 @@ export default class HomePage {
         }
     }
 
+    addEventListeners() {
+        this.canvas.addEventListener('mousedown', this.clickListener);
+        this.canvas.addEventListener('mousemove', this.moveListener);
+    }
+
     render() {
+
         this.getLevelsCompleted();
         this.home = setInterval(() => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -121,24 +172,20 @@ export default class HomePage {
             this.ctx.font = "32px 'Press Start 2P'"
             this.ctx.fillText('Otherworlds', 225, 90)
 
-            //controls
-            this.ctx.font = "14px 'Press Start 2P'"
-            this.ctx.fillText('WASD - Move', 323, 140)
-            this.ctx.fillText('Space - Jump', 309, 170)
-            this.ctx.fillText('Esc - Pause', 337, 200)
+            
 
     
             // world select      
             // --world name
             this.ctx.font = "28px 'Press Start 2P'"
-            this.ctx.fillText(`World ${this.currentWorld}`, 302, 270)
+            this.ctx.fillText(`World ${this.currentWorld}`, 302, 280)
 
             //-- world cycling arrows
             //---- right arrow
             this.ctx.beginPath();
-            this.ctx.moveTo(560, 270);
-            this.ctx.lineTo(590, 255);
-            this.ctx.lineTo(560, 240);
+            this.ctx.moveTo(560, 280);
+            this.ctx.lineTo(590, 265);
+            this.ctx.lineTo(560, 250);
             this.ctx.closePath();
 
             this.ctx.lineWidth = 5;
@@ -150,9 +197,9 @@ export default class HomePage {
 
             //---- left arrow
             this.ctx.beginPath();
-            this.ctx.moveTo(240, 270);
-            this.ctx.lineTo(210, 255);
-            this.ctx.lineTo(240, 240);
+            this.ctx.moveTo(240, 280);
+            this.ctx.lineTo(210, 265);
+            this.ctx.lineTo(240, 250);
             this.ctx.closePath();
 
             this.ctx.lineWidth = 5;
@@ -167,7 +214,7 @@ export default class HomePage {
             for (let i = 0; i < 5; i++) {
                 let fillColor = "rgb(120,120,120)";
                 if ((this.currentWorld - 1) * 5 + i <= this.levelsCompleted) {
-                    fillColor = "rgb(240,240,240)";
+                    fillColor = this.levelFills[i];
                 }
                 let increment = i * 130;
 
@@ -188,7 +235,7 @@ export default class HomePage {
             }
             this.ctx.drawImage(soundButton, 660, 30, 40, 30);
 
-            //mute music button
+            // mute music button
             let musicButton = new Image();
             if (this.musicMuted) {
                 musicButton.src = 'dist/images/musicOff.png'
@@ -197,6 +244,27 @@ export default class HomePage {
             }
             this.ctx.drawImage(musicButton, 730, 30, 40, 30);
 
+
+            // show/hide controls
+            this.ctx.fillStyle = '#ffffff'
+            this.ctx.font = "12px 'Press Start 2P'"
+            this.ctx.fillText("controls", 20, 30)
+
+            if (this.showControls) {
+                this.ctx.fillStyle = 'rgba(0,0,0,0.7)'
+                this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height)
+
+                this.ctx.fillStyle = '#ffffff'
+                this.ctx.font = "20px 'Press Start 2P'"
+                this.ctx.fillText('WASD - Move', 290, 210)
+                this.ctx.fillText('Space - Jump', 270, 250)
+                this.ctx.fillText('Esc - Pause', 310, 290)
+            }
+
+            // stats
+            this.ctx.font = "20px 'Press Start 2P'"
+            if (this.bestTime != -1) this.ctx.fillText(`Best Time: ${this.bestTime/100}`, 240, 160)
+            if (this.deathCount != -1) this.ctx.fillText(`Death Count: ${this.deathCount}`, 260, 200)
         },10)
         
     }

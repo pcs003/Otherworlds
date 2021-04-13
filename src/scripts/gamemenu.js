@@ -23,6 +23,9 @@ export default class GameMenu {
         this.renderGame = renderGame;
         this.renderHome = renderHome;
 
+        this.newBest = false;
+        this.time = 0;
+
         this.gameMusic = gameMusic;
         this.musicMuted = musicMuted;
         this.toggleSoundMuted = toggleSoundMuted;
@@ -86,10 +89,12 @@ export default class GameMenu {
         
     }
 
-    setMenuData(type, worldNum, levelNum) {
+    setMenuData(type, worldNum, levelNum, newBest, time) {
         this.type = type;
         this.worldNum = worldNum;
         this.levelNum = levelNum;
+        this.newBest = newBest;
+        this.time = time;
     }
 
     close() {
@@ -147,6 +152,13 @@ export default class GameMenu {
             }
             
         }, 10)
+    }
+
+    timeText() {
+        let timeString = (this.time/100).toString();
+        let split = timeString.split(".")
+        let formatted = split[0] + ":" + split[1];
+        return formatted;
     }
 
     render() {
@@ -248,16 +260,32 @@ export default class GameMenu {
                 this.ctx.fill();
             }
         } else if (this.type == "complete") {
-            this.ctx.fillText("Next Level", 300, 200)
-            this.ctx.fillText("Main Menu", 310, 250)
+            this.ctx.fillStyle = "rgb(0,0,0)";
+            this.ctx.fillRect(200,300,400,100)
+            this.ctx.fillStyle = "#ffffff";
+
+            if (this.newBest) {
+                // new high score text
+                this.ctx.fillStyle = 'rgb(0,255,0)';
+                this.ctx.font = "12px 'Press Start 2P'"
+                this.ctx.fillText("New Best Time!", 316, 200)
+
+                // reset fillstyle and font
+                this.ctx.font = "20px 'Press Start 2P'"
+                this.ctx.fillStyle = "#ffffff";
+            }
+            this.ctx.fillText(`Time: ${this.timeText()}`, 290, 225)
+
+            this.ctx.fillText("Next Level", 300, 300)
+            this.ctx.fillText("Main Menu", 310, 350)
 
             // draw selected arrows around currently selected option
             if (this.selected == 1) {
                 //left arrow
                 this.ctx.beginPath();
-                this.ctx.moveTo(240, 200);
-                this.ctx.lineTo(260, 190);
-                this.ctx.lineTo(240, 180);
+                this.ctx.moveTo(240, 300);
+                this.ctx.lineTo(260, 290);
+                this.ctx.lineTo(240, 280);
                 this.ctx.closePath();
 
                 this.ctx.lineWidth = 5;
@@ -269,9 +297,9 @@ export default class GameMenu {
 
                 // right arrow
                 this.ctx.beginPath();
-                this.ctx.moveTo(560, 200);
-                this.ctx.lineTo(540, 190);
-                this.ctx.lineTo(560, 180);
+                this.ctx.moveTo(560, 300);
+                this.ctx.lineTo(540, 290);
+                this.ctx.lineTo(560, 280);
                 this.ctx.closePath();
 
                 this.ctx.lineWidth = 5;
@@ -282,9 +310,9 @@ export default class GameMenu {
                 this.ctx.fill();
             } else {
                 this.ctx.beginPath();
-                this.ctx.moveTo(250, 250);
-                this.ctx.lineTo(270, 240);
-                this.ctx.lineTo(250, 230);
+                this.ctx.moveTo(250, 350);
+                this.ctx.lineTo(270, 340);
+                this.ctx.lineTo(250, 330);
                 this.ctx.closePath();
 
                 this.ctx.lineWidth = 5;
@@ -296,9 +324,9 @@ export default class GameMenu {
 
                 // right arrow
                 this.ctx.beginPath();
-                this.ctx.moveTo(550, 250);
-                this.ctx.lineTo(530, 240);
-                this.ctx.lineTo(550, 230);
+                this.ctx.moveTo(550, 350);
+                this.ctx.lineTo(530, 340);
+                this.ctx.lineTo(550, 330);
                 this.ctx.closePath();
 
                 this.ctx.lineWidth = 5;

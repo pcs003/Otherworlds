@@ -408,7 +408,6 @@ export default class Game {
             this.portalFrame = (this.portalFrame + 1) % 80;
 
             this.frameNum++;
-            
         }, 10)
         
     
@@ -426,6 +425,8 @@ export default class Game {
             this.menu.setMenuData("complete",this.worldNum, this.levelNum, newBest, this.levelTime);
             this.menu.open();
         }, 4000)
+        this.Player.x = 469;
+        this.Player.y = 221;
         let count = 0;
         let exitX = 500;
         let exitY = 180;

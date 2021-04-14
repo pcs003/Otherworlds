@@ -154,13 +154,6 @@ export default class GameMenu {
         }, 10)
     }
 
-    timeText() {
-        let timeString = (this.time/100).toString();
-        let split = timeString.split(".")
-        let formatted = split[0] + ":" + split[1];
-        return formatted;
-    }
-
     render() {
         // draw menu box
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -274,7 +267,7 @@ export default class GameMenu {
                 this.ctx.font = "20px 'Press Start 2P'"
                 this.ctx.fillStyle = "#ffffff";
             }
-            this.ctx.fillText(`Time: ${this.timeText()}`, 290, 225)
+            this.ctx.fillText(`Time: ${(this.time/100).toString()}`, 290, 225)
 
             this.ctx.fillText("Next Level", 300, 300)
             this.ctx.fillText("Main Menu", 310, 350)

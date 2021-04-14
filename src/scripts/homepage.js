@@ -221,7 +221,7 @@ export default class HomePage {
                 this.ctx.fillStyle = fillColor;
                 this.ctx.fillRect(105 + increment,350,60,60)
                 this.ctx.fillStyle = "rgb(0,0,0)"
-                this.ctx.fillText((i + 1).toString(), 120 + increment, 397)
+                this.ctx.fillText((i + 1).toString(), 122 + increment, 397)
             }
 
             // mute sound button
@@ -243,8 +243,14 @@ export default class HomePage {
             this.ctx.drawImage(musicButton, 730, 30, 40, 30);
 
 
-            // show/hide controls
+            // stats
             this.ctx.fillStyle = '#ffffff'
+            this.ctx.font = "20px 'Press Start 2P'"
+            this.ctx.fillText(`Best Time: ${this.bestTime}`, 240, 160)
+            this.ctx.fillText(`Death Count: ${this.deathCount}`, 260, 200)
+
+            // show/hide controls
+            
             this.ctx.font = "12px 'Press Start 2P'"
             this.ctx.fillText("controls", 20, 30)
 
@@ -258,11 +264,6 @@ export default class HomePage {
                 this.ctx.fillText('Space - Jump', 270, 250)
                 this.ctx.fillText('Esc - Pause', 310, 290)
             }
-
-            // stats
-            this.ctx.font = "20px 'Press Start 2P'"
-            this.ctx.fillText(`Best Time: ${this.bestTime}`, 240, 160)
-            this.ctx.fillText(`Death Count: ${this.deathCount}`, 260, 200)
         },10)
         
     }

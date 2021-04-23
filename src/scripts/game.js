@@ -20,7 +20,7 @@ export default class Game {
         this.toggleSoundMuted = toggleSoundMuted;
         this.getSoundMuted = getSoundMuted;
         this.toggleMusicMuted = toggleMusicMuted;
-
+        this.showControls = false;
         this.frameNum = 0;
         this.levelTime = 6000;
         this.paused = false;
@@ -90,11 +90,11 @@ export default class Game {
         }
 
         window.addEventListener('keydown', event => {
-            if (event.key == 'd') {
+            if (event.key == 'd' || event.key == 'ArrowRight') {
                 this.Player.velocity[0] = this.VELOCITY_X;
                 this.Player.moving = true;
                 this.Player.faceRight = true;
-            } else if (event.key == 'a') {
+            } else if (event.key == 'a' || event.key == 'ArrowLeft') {
                 this.Player.velocity[0] = -this.VELOCITY_X;
                 this.Player.moving = true;
                 this.Player.faceRight = false;
@@ -114,17 +114,28 @@ export default class Game {
             }
         })
         window.addEventListener('keyup', event => {
-            if (event.key == 'd') {
+            if (event.key == 'd' || event.key == 'ArrowRight') {
                 this.Player.velocity[0] = 0;
                 this.Player.moving = false;
-            } else if (event.key == 'a') {
+            } else if (event.key == 'a' || event.key == 'ArrowLeft') {
                 this.Player.velocity[0] = 0;
                 this.Player.moving = false;
             } else if (event.key == ' ') {
                 this.Player.isJumping = false
             }
         })
+        this.moveListener = event => {
+            let canvasPos = this.canvas.getBoundingClientRect();
+            let mouseX = event.x - canvasPos.left;
+            let mouseY = event.y - canvasPos.top;
 
+            if (mouseX > 0 && mouseX < 125 && mouseY > 0 && mouseY < 45) {
+                this.showControls = true;
+            } else {
+                this.showControls = false;
+            }
+        }
+        this.canvas.addEventListener('mousemove', this.moveListener);
     }
 
     setGame(newGame) {
@@ -175,7 +186,7 @@ export default class Game {
         this.images = [];
         this.levelData.interactables.forEach(interactable => {
             if (interactable.weak) {
-                this.interactables.push(new WeakPlatform(this.canvas, this.ctx, interactable.x, interactable.y, interactable.height, interactable.width, 1000, interactable.imgUrl, this.GRAVITY));
+                this.interactables.push(new WeakPlatform(this.canvas, this.ctx, interactable.x, interactable.y, interactable.height, interactable.width, interactable.duration, interactable.imgUrl, this.GRAVITY));
             } else {
                 this.interactables.push(new Interactable(this.canvas, this.ctx, interactable.x, interactable.y, interactable.height, interactable.width));
                 if (interactable.imgUrl.length > 0) {
@@ -283,7 +294,7 @@ export default class Game {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.fillStyle = "rgb(0,0,0)"
 
-            if (this.Player.y > 500 || this.levelTime <= 110) {
+            if (this.Player.y > 500 || this.levelTime <= 99) {
                 this.gameOver(gameLoop)
             }
     
@@ -347,20 +358,17 @@ export default class Game {
                 interactable.render();
                 if (interactable.isCollidingX(this.Player.x + this.Player.width/2 + this.Player.velocity[0], this.Player.y + this.Player.height/2 + this.Player.velocity[1])) {
                     this.Player.collidingX = true;
-                    // if (interactable instanceof WeakPlatform) {
-                    //     setTimeout(() => {
-                    //         interactable.fall();
-                    //     }, interactable.duration)
-                    // }
                 }
     
                 if (interactable.isCollidingY(this.Player.x + this.Player.width/2 + this.Player.velocity[0], this.Player.y + this.Player.height/2 + this.Player.velocity[1])) {
+                    if (interactable.fall && !interactable.isFalling) {
+                        interactable.fall();
+                        console.log("fall")
+                    }
                     this.Player.collidingY = true;
                     this.Player.grounded = true;
                     this.Player.collisionsurfaceY = interactable.y;
-                    if (interactable instanceof WeakPlatform) {
-                        interactable.fall();
-                    }
+                    
                 }
             })
 
@@ -402,7 +410,23 @@ export default class Game {
             this.levelTime--;
             this.ctx.fillText(Math.floor(this.levelTime/100).toString(), 700, 50);
     
-            
+            // controls hover
+            this.ctx.fillStyle = "#ffffff";
+            this.ctx.font = "12px 'Press Start 2P'"
+            this.ctx.fillText('controls', 20, 30)
+            if (this.showControls) {
+                this.ctx.fillStyle = 'rgba(0,0,0,0.7)'
+                this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height)
+
+                this.ctx.fillStyle = '#ffffff'
+                this.ctx.font = "20px 'Press Start 2P'"
+                this.ctx.fillText('WASD - Move', 290, 170)
+                this.ctx.fillText('Space - Jump', 270, 210)
+                this.ctx.fillText('Esc - Pause', 310, 250)
+                this.ctx.font = "12px 'Press Start 2P'"
+                this.ctx.fillText('Useful Tip: Holding the arrow key in the direction of', 90, 310)
+                this.ctx.fillText('a wall while colliding with it will slow your fall', 110, 330)
+            }
     
             this.Player.frameNum = (this.Player.frameNum + 1) % 40
             this.portalFrame = (this.portalFrame + 1) % 80;

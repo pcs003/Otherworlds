@@ -260,9 +260,12 @@ export default class HomePage {
 
                 this.ctx.fillStyle = '#ffffff'
                 this.ctx.font = "20px 'Press Start 2P'"
-                this.ctx.fillText('WASD - Move', 290, 210)
-                this.ctx.fillText('Space - Jump', 270, 250)
-                this.ctx.fillText('Esc - Pause', 310, 290)
+                this.ctx.fillText('WASD - Move', 290, 170)
+                this.ctx.fillText('Space - Jump', 270, 210)
+                this.ctx.fillText('Esc - Pause', 310, 250)
+                this.ctx.font = "12px 'Press Start 2P'"
+                this.ctx.fillText('Useful Tip: Holding the arrow key in the direction of', 90, 310)
+                this.ctx.fillText('a wall while colliding with it will slow your fall', 110, 330)
             }
         },10)
         

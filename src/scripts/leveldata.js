@@ -334,46 +334,298 @@ export const LevelData = [
             playerStartPos:[100,300],
             interactables: [
                 {
-                    x: 80,
-                    y: 420,
-                    height: 30,
-                    width: 640,
-                    imgUrl: 'dist/images/world2LargePlatform.png',
-                    yOffset: 0,
-                    imgHeight: 30
-                },
-                {
-                    x: 500,
-                    y: 300,
+                    x: 50,
+                    y: 450,
                     height: 20,
                     width: 100,
-                    imgUrl:'dist/images/world2SmallPlatform.png',
+                    imgUrl: 'dist/images/world2SmallPlatform.png',
                     yOffset: 0,
                     imgHeight: 20
                 },
                 {
-                    x: 325,
+                    x: 200,
+                    y: 400,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 300,
+                    y: 350,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 400,
+                    y: 300,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 500,
+                    y: 250,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 600,
                     y: 200,
                     height: 20,
                     width: 50,
                     imgUrl:'dist/images/world2TinyWeakPlatform.png',
                     yOffset: 0,
                     imgHeight: 20,
-                    weak: true
+                    weak: true,
+                    duration: 100
                 },
                 {
+                    x: 700,
+                    y: 150,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 675,
+                    y: 450,
+                    height: 20,
+                    width: 100,
+                    imgUrl: 'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20
+                },
+                
+            ],
+            finishPos: [700,400],
+            gravity: -0.1,
+            levelText: "Spaceman finds himself in an arid mountain world with stone platforms. Some of the platforms seem quite old..."
+        },
+        // world 2 level 2
+        {
+            playerStartPos:[100,300],
+            interactables: [
+                {
+                    x: 50,
+                    y: 450,
+                    height: 20,
+                    width: 100,
+                    imgUrl: 'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20
+                },
+                {
+                    x: 200,
+                    y: 400,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 300,
+                    y: 350,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 400,
+                    y: 300,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 500,
+                    y: 250,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 600,
+                    y: 200,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 700,
+                    y: 150,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 675,
+                    y: 450,
+                    height: 20,
+                    width: 100,
+                    imgUrl: 'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20
+                },
+                
+            ],
+            finishPos: [700,400],
+            gravity: -0.1,
+            levelText: "Spaceman finds himself in an arid mountain world with stone platforms. Some of the platforms seem quite old..."
+        },
+        // world 2 level 4
+        {
+            playerStartPos:[100,300],
+            interactables: [
+                {
                     x: 80,
-                    y: 110,
+                    y: 450,
+                    height: 20,
+                    width: 100,
+                    imgUrl: 'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20
+                },
+                {
+                    x: 370,
+                    y: 450,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 600,
+                    y: 450,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 750,
+                    y: 350,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 600,
+                    y: 250,
                     height: 20,
                     width: 100,
                     imgUrl:'dist/images/world2SmallPlatform.png',
                     yOffset: 0,
                     imgHeight: 20
-                }
+                },
+                {
+                    x: 470,
+                    y: 200,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 420,
+                    y: 200,
+                    height: 20,
+                    width: 50,
+                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20,
+                    weak: true,
+                    duration: 100
+                },
+                {
+                    x: 220,
+                    y: 250,
+                    height: 20,
+                    width: 100,
+                    imgUrl:'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20
+                },
+                {
+                    x: 0,
+                    y: 180,
+                    height: 20,
+                    width: 100,
+                    imgUrl:'dist/images/world2SmallPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 20
+                },
+                {
+                    x: 160,
+                    y: 70,
+                    height: 30,
+                    width: 640,
+                    imgUrl: 'dist/images/world2LargeWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30,
+                    weak: true,
+                    duration: 0
+                },
             ],
-            finishPos: [100,50],
+            finishPos: [600,20],
             gravity: -0.1,
-            levelText: "Spaceman finds himself in an arid mountain world with stone platforms. Some of the platforms seem quite old..."
         },
     ]
 ]

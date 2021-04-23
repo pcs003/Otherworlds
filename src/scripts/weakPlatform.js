@@ -8,19 +8,21 @@ export default class WeakPlatform extends Interactable{
         this.imgUrl = imgUrl;
         this.gravity = gravity;
         this.img = new Image();
-
+        this.isFalling = false;
         this.fallSpeed = 0; // pixels per second
     }
 
     fall() {
+        console.log("started flal function")
+        this.isFalling = true;
         setTimeout( () => {
             clearInterval(platformFall);
-        }, (this.canvas.height - this.y) * 10 + this.duration)
+        }, (this.canvas.height - this.y + 100) * 10 + this.duration)
         let count = 0;
         const platformFall = setInterval(() => {
-            if (count > this.duration / 10) {
+            if (count > this.duration/100) {
                 this.fallSpeed += this.gravity;
-                this.y -= this.fallSpeed / 1000;
+                this.y -= this.fallSpeed;
             }
             count++;
         }, 10);

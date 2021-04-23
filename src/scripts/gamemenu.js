@@ -48,13 +48,13 @@ export default class GameMenu {
 
         window.addEventListener("keydown", event => {
             if (this.active) {
-                if (event.key == 'w') {
+                if (event.key == 'w' || event.key == 'ArrowUp') {
                     if (this.selected != 1) {
                         if (!this.getSoundMuted()) this.menuBlip.play();
                         this.selected--;
                         this.render();
                     }
-                } else if (event.key == 's') {
+                } else if (event.key == 's' || event.key == 'ArrowDown') {
                     let maxNum = this.type == "pause" ? 3 : 2;
                     if (this.selected != maxNum) {
                         if (!this.getSoundMuted()) this.menuBlip.play();

@@ -517,7 +517,7 @@ export const LevelData = [
             gravity: -0.1,
             levelText: "Spaceman finds himself in an arid mountain world with stone platforms. Some of the platforms seem quite old..."
         },
-        // world 2 level 4
+        // world 2 level 3
         {
             playerStartPos:[100,300],
             interactables: [

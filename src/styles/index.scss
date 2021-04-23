@@ -7,46 +7,139 @@
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    width: 1080px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    .header {
+        height: 160px;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgb(62,42,97);
+        background: linear-gradient(0deg, rgba(62,42,97,1) 0%, rgba(0,0,0,1) 100%);
+        border-bottom: 6px solid rgb(71,71,71);
+
+        h1 {
+            color: white;
+            font-family: 'Press Start 2P';
+            font-size: 40px;
+        }
+
+        h2 {
+            margin-top: 12px;
+            font-family: 'Press Start 2P';
+            font-size: 16px;
+            color: #dcddde;
+        }
+    }
+
+    .canvas-container {
+        display: flex;
+        justify-content: center;
+        width: 100vw;
+        height: 660px;
+        background: url("../assets/sheetmetalbg.png");
+        position: relative;
+        border-bottom: 6px solid rgb(71,71,71);
+
+        h5 {
+            color:white;
+            font-family: 'Press Start 2P';
+            font-size: 16px;
+        }
+
+        #canvas-main {
+            width: 800px;
+            height: 500px;
+            border: 4px solid black;
+            background: #eee; 
+            display: block; 
+            z-index: 1;
+            margin-top: 80px;
+        }
+        
+        #canvas-menu {
+            display: none;
+            top: 80px;
+            left: Calc(50vw - 400px);
+            width: 800px;
+            height: 500px;
+            z-index: 2;
+        }
+        
+        #canvas-menu.active {
+            display: block;
+        }
+        
+        #canvas-text {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: Calc(50vw - 400px);
+            width: 800px;
+            height: 500px;
+            z-index: 5;
+        }
+        
+        #canvas-text.active {
+            display: block;
+        }
+        
+    }
+
+    .bottom {
+        height: 260px;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(62,42,97,1) 100%);
+    
+        h5 {
+            margin-top: 40px;
+            color:white;
+            font-family: 'Press Start 2P';
+            font-size: 20px;
+        }
+
+        h6 {
+            margin-top: 12px;
+            color:#dcddde;
+            font-family: 'Press Start 2P';
+            font-size: 12px;
+        }
+
+        .about-container {
+            display: flex;
+            padding-top: 12px;
+            width: 600px;
+            justify-content: space-between;
+            a {
+                text-decoration: none;
+                background-color: white;
+                color: rgb(35,39,42);
+                border-radius: 30px;
+                padding: 13.5px 17px;
+                font-family: 'Press Start 2P';
+                font-size: 12px;
+                margin-top: 12px;
+                transition: 0.17s;
+            }
+
+            a:hover {
+                color:#ca2c16;
+                box-shadow: 0 0 15px 5px rgba(202,44,22,0.6);
+                transition: 0.17s;
+            }
+            
+        }
+
+    }
 }
 
-#canvas-main {
-    width: 800px;
-    height: 500px;
-    border: 4px solid black;
-    background: #eee; 
-    display: block; 
-    margin: 50px auto;
-    z-index: 1;
-}
-
-#canvas-menu {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: Calc(50% - 400px);
-    width: 800px;
-    height: 500px;
-    z-index: 2;
-}
-
-#canvas-menu.active {
-    display: block;
-}
-
-#canvas-text {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: Calc(50% - 400px);
-    width: 800px;
-    height: 500px;
-    z-index: 5;
-}
-
-#canvas-text.active {
-    display: block;
-}

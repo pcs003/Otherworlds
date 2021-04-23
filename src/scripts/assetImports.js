@@ -1,4 +1,8 @@
 //images 
+import otherworldsTitle from '../assets/otherworlds_title.png'
+import me from '../assets/me.png'
+import smbg from '../assets/sheetmetalbg.png'
+
 import runRightImage1 from '../assets/runRightFrame1.png'
 import runRightImage2 from '../assets/runRightFrame2.png'
 import runRightImage3 from '../assets/runRightFrame3.png'

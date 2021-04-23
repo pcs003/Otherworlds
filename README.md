@@ -1,5 +1,7 @@
 # Otherworlds
+[Live Site](https://pcs003.github.io/Otherworlds/)
 
+![Otherworlds Banner](/src/assets/otherworlds_title.png)
 ## Overview
 
 A space themed game with sets of levels taking place in a world with certain properties. The first world will be like a tutorial
@@ -25,23 +27,8 @@ Bonus - more worlds (5 levels each)
 
 ## Architecture & Technology
 
-Otherworlds will be built using Javascript, HTML, and CSS.
+* Javascript
+* HTML
+* CSS
 
-## Implementation Timeline
-
-### Day 1
-* General set up
-* Prepare character, home screen, and level 1 assets
-* Complete home page
-
-### Day 2
-* Set up player movement and animations
-* Start level 1
-
-### Day 3
-* Finish level 1 and 2
-
-### Day 4
-* Finish level 3
-* Begin work on second world
-
+## 

@@ -24,12 +24,12 @@ Users can inidividually mute/unmute music and sound effects in the main menu. Us
 ## Features
 
 ### Player Movement
-![Alt Text]()
+![Alt Text](https://media.giphy.com/media/0WI1DcY18Dp0Fp8GPH/giphy.gif)
 
 Users can move the character using wasd/arrow keys and the space bar. Game physics are velocity based, so clicking the space bar applies force in the upwards direction and gravity is a constant force applying force in the downward direction. All player animations and sprites are original.
 
 ### Platform Collision
-![Alt Text]()
+![Alt Text](https://media.giphy.com/media/xJ0LutVkJGTqsUTDWd/giphy.gif)
 
 Player-Platform collisions are calculated using separate X and Y collision detection functions. All types of platforms are subclasses of the Interactable class in which the generic collision function is defined. X and Y collision are calculated separately in order to allow for different collision interactions such as the player being able to slide down a wall slowly by holding the arrow key in the direction of the wall.
 

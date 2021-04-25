@@ -66,11 +66,12 @@ body {
         
         #canvas-menu {
             display: none;
+            position: absolute;
             top: 80px;
             left: Calc(50vw - 400px);
             width: 800px;
             height: 500px;
-            z-index: 2;
+            z-index: 5;
         }
         
         #canvas-menu.active {
@@ -84,7 +85,7 @@ body {
             left: Calc(50vw - 400px);
             width: 800px;
             height: 500px;
-            z-index: 5;
+            z-index: 2;
         }
         
         #canvas-text.active {

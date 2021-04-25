@@ -98,14 +98,20 @@ export default class Game {
                 this.Player.velocity[0] = -this.VELOCITY_X;
                 this.Player.moving = true;
                 this.Player.faceRight = false;
-            } else if (event.key == ' ' && this.Player.grounded && !this.Player.isJumping ) {
-                if (!this.getSoundMuted()) this.jumpSound.play();
-                this.Player.velocity[1] -= 5;
-                this.Player.isJumping = true;
-                this.Player.grounded = false;
-                setTimeout(() => {
-                    this.Player.isJumping = false
-                }, 60)
+            } else if (event.key == ' ') {
+                if (event.target == document.body) {
+                    event.preventDefault();
+                }
+                if (this.Player.grounded && !this.Player.isJumping) {
+                    if (!this.getSoundMuted()) this.jumpSound.play();
+                    this.Player.velocity[1] -= 5;
+                    this.Player.isJumping = true;
+                    this.Player.grounded = false;
+                    setTimeout(() => {
+                        this.Player.isJumping = false
+                    }, 60)
+                }
+                
             } else if (event.key == "Escape") {
                 this.pauseSound.pause();
                 this.pauseSound.currentTime = 0;
@@ -121,6 +127,9 @@ export default class Game {
                 this.Player.velocity[0] = 0;
                 this.Player.moving = false;
             } else if (event.key == ' ') {
+                if (event.target == document.body) {
+                    event.preventDefault();
+                }
                 this.Player.isJumping = false
             }
         })

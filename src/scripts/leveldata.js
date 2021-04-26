@@ -351,7 +351,7 @@ export const LevelData = [
                     yOffset: 0,
                     imgHeight: 20,
                     weak: true,
-                    duration: 100
+                    duration: 2000
                 },
                 {
                     x: 300,
@@ -362,7 +362,7 @@ export const LevelData = [
                     yOffset: 0,
                     imgHeight: 20,
                     weak: true,
-                    duration: 100
+                    duration: 2000
                 },
                 {
                     x: 400,
@@ -373,7 +373,7 @@ export const LevelData = [
                     yOffset: 0,
                     imgHeight: 20,
                     weak: true,
-                    duration: 100
+                    duration: 2000
                 },
                 {
                     x: 500,
@@ -384,7 +384,7 @@ export const LevelData = [
                     yOffset: 0,
                     imgHeight: 20,
                     weak: true,
-                    duration: 100
+                    duration: 2000
                 },
                 {
                     x: 600,
@@ -395,7 +395,7 @@ export const LevelData = [
                     yOffset: 0,
                     imgHeight: 20,
                     weak: true,
-                    duration: 100
+                    duration: 2000
                 },
                 {
                     x: 700,
@@ -406,7 +406,7 @@ export const LevelData = [
                     yOffset: 0,
                     imgHeight: 20,
                     weak: true,
-                    duration: 100
+                    duration: 2000
                 },
                 {
                     x: 675,
@@ -425,97 +425,298 @@ export const LevelData = [
         },
         // world 2 level 2
         {
-            playerStartPos:[100,300],
+            playerStartPos:[200,300],
             interactables: [
                 {
-                    x: 50,
-                    y: 450,
-                    height: 20,
-                    width: 100,
-                    imgUrl: 'dist/images/world2SmallPlatform.png',
+                    x: 100,
+                    y: 470,
+                    height: 30,
+                    width: 700,
+                    imgUrl: 'dist/images/world2LargePlatform.png',
                     yOffset: 0,
-                    imgHeight: 20
+                    imgHeight: 30
                 },
                 {
-                    x: 200,
-                    y: 400,
-                    height: 20,
-                    width: 50,
-                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    x: 100,
+                    y: 370,
+                    height: 30,
+                    width: 700,
+                    imgUrl: 'dist/images/world2LargePlatform.png',
                     yOffset: 0,
-                    imgHeight: 20,
-                    weak: true,
-                    duration: 100
+                    imgHeight: 30
                 },
                 {
-                    x: 300,
-                    y: 350,
-                    height: 20,
-                    width: 50,
-                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
+                    x: 100,
+                    y: 340,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
                     yOffset: 0,
-                    imgHeight: 20,
-                    weak: true,
-                    duration: 100
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 310,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 280,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 250,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 220,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 190,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 160,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 130,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 100,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 70,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 100,
+                    y: 40,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 435,
+                    y: 40,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 435,
+                    y: 70,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
                 },
                 {
                     x: 400,
-                    y: 300,
-                    height: 20,
-                    width: 50,
-                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
-                    yOffset: 0,
-                    imgHeight: 20,
-                    weak: true,
-                    duration: 100
-                },
-                {
-                    x: 500,
-                    y: 250,
-                    height: 20,
-                    width: 50,
-                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
-                    yOffset: 0,
-                    imgHeight: 20,
-                    weak: true,
-                    duration: 100
-                },
-                {
-                    x: 600,
-                    y: 200,
-                    height: 20,
-                    width: 50,
-                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
-                    yOffset: 0,
-                    imgHeight: 20,
-                    weak: true,
-                    duration: 100
-                },
-                {
-                    x: 700,
-                    y: 150,
-                    height: 20,
-                    width: 50,
-                    imgUrl:'dist/images/world2TinyWeakPlatform.png',
-                    yOffset: 0,
-                    imgHeight: 20,
-                    weak: true,
-                    duration: 100
-                },
-                {
-                    x: 675,
-                    y: 450,
-                    height: 20,
+                    y: 280,
+                    height: 30,
                     width: 100,
+                    imgUrl: 'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30,
+                    weak: true,
+                    duration: 2000
+                },
+                {
+                    x: 290,
+                    y: 280,
+                    height: 30,
+                    width: 100,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 190,
+                    y: 280,
+                    height: 30,
+                    width: 100,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 510,
+                    y: 280,
+                    height: 30,
+                    width: 400,
+                    imgUrl: 'dist/images/world2MediumPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 435,
+                    y: 250,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 435,
+                    y: 220,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 400,
+                    y: 190,
+                    height: 30,
+                    width: 100,
+                    imgUrl: 'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30,
+                    weak: true,
+                    duration: 2000
+                },
+                {
+                    x: 290,
+                    y: 190,
+                    height: 30,
+                    width: 100,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 510,
+                    y: 190,
+                    height: 30,
+                    width: 200,
                     imgUrl: 'dist/images/world2SmallPlatform.png',
                     yOffset: 0,
-                    imgHeight: 20
+                    imgHeight: 30
                 },
-                
+                {
+                    x: 435,
+                    y: 160,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 435,
+                    y: 130,
+                    height: 30,
+                    width: 30,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 400,
+                    y: 100,
+                    height: 30,
+                    width: 100,
+                    imgUrl: 'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30,
+                    weak: true,
+                    duration: 2000
+                },
+                {
+                    x: 290,
+                    y: 100,
+                    height: 30,
+                    width: 100,
+                    imgUrl: 'dist/images/world2TinyPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 510,
+                    y: 100,
+                    height: 30,
+                    width: 400,
+                    imgUrl: 'dist/images/world2MediumPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+                {
+                    x: 130,
+                    y: 180,
+                    height: 30,
+                    width: 60,
+                    imgUrl: 'dist/images/world2TinyWeakPlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30,
+                    weak: true,
+                    duration: 2000
+                },
+                {
+                    x: 100,
+                    y: 10,
+                    height: 30,
+                    width: 500,
+                    imgUrl: 'dist/images/world2LargePlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
             ],
-            finishPos: [700,400],
+            finishPos: [700,420],
             gravity: -0.1,
-            levelText: "Spaceman finds himself in an arid mountain world with stone platforms. Some of the platforms seem quite old..."
         },
         // world 2 level 3
         {
@@ -626,6 +827,39 @@ export const LevelData = [
             ],
             finishPos: [600,20],
             gravity: -0.1,
+            levelText: 'As you delve deeper into the ruins, the platforms are older and weaker'
         },
+        {
+            playerStartPos:[100,200],
+            interactables: [
+                {
+                    x: 80,
+                    y: 280,
+                    height: 30,
+                    width: 640,
+                    imgUrl: 'dist/images/world2LargePlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+            ],
+            finishPos: [500,180],
+            gravity: -0.1,
+        },
+        {
+            playerStartPos:[100,200],
+            interactables: [
+                {
+                    x: 80,
+                    y: 280,
+                    height: 30,
+                    width: 640,
+                    imgUrl: 'dist/images/world2LargePlatform.png',
+                    yOffset: 0,
+                    imgHeight: 30
+                },
+            ],
+            finishPos: [500,180],
+            gravity: -0.1,
+        }
     ]
 ]

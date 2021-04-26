@@ -91,6 +91,7 @@ export default class Game {
 
         window.addEventListener('keydown', event => {
             if (event.key == 'd' || event.key == 'ArrowRight') {
+                
                 this.Player.velocity[0] = this.VELOCITY_X;
                 this.Player.moving = true;
                 this.Player.faceRight = true;

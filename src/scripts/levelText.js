@@ -46,14 +46,18 @@ export default class LevelText {
         window.addEventListener("keydown", e => {
             if (e.key == "Escape" && this.active) {
                 e.preventDefault();
-                this.active = false;
-                clearTimeout(this.textTimeout)
-                clearTimeout(this.fadeTimeout)
-                clearInterval(this.fadeInLoop)
-                clearInterval(this.fadeOutLoop)
-                this.close();
+                this.stopText();
             }
         })
+    }
+
+    stopText() {
+        this.active = false;
+        clearTimeout(this.textTimeout)
+        clearTimeout(this.fadeTimeout)
+        clearInterval(this.fadeInLoop)
+        clearInterval(this.fadeOutLoop)
+        this.close();
     }
 
     fadeIn() {

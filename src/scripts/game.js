@@ -257,7 +257,15 @@ export default class Game {
         return false;
     }
 
+    clearLevelText() {
+        if (this.levelText != "") {
+            this.levelText.stopText();
+        }
+    }
+
     gameOver(gameLoop) {
+        this.clearLevelText();
+
         this.interactables = [];
         clearInterval(gameLoop);
 
@@ -269,6 +277,7 @@ export default class Game {
     }
 
     levelComplete(gameLoop) {
+        this.clearLevelText();
         // set new levelsCompleted localStorage variable
         this.active = false;
         let current = window.localStorage.getItem("levelsCompleted");

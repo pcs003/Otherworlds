@@ -26,6 +26,7 @@ export default class Game {
         this.paused = false;
         this.menu = new GameMenu(this.canvas, this.ctx, "failed",this.worldNum, this.levelNum, this.game, this.setData.bind(this), this.togglePause.bind(this), this.render.bind(this), this.renderHome, this.gameMusic, this.musicMuted, this.toggleSoundMuted, this.getSoundMuted, this.toggleSoundMuted);
         
+        this.active = false;
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -113,7 +114,8 @@ export default class Game {
                     }, 60)
                 }
                 
-            } else if (event.key == "Escape") {
+            } else if (event.key == "Escape" && this.active) {
+                console.log("game.js")
                 this.pauseSound.pause();
                 this.pauseSound.currentTime = 0;
                 if (!this.getSoundMuted()) this.pauseSound.play();
@@ -152,10 +154,16 @@ export default class Game {
         this.game = newGame;
     }
 
+    setInactive(){
+        this.active = false;
+    }
+
     setData(worldNum, levelNum, game) {
         this.worldNum = worldNum;
         this.levelNum = levelNum;
         this.game = game;
+
+        this.active = true;
 
         this.frameNum = 0;
         this.levelTime = 6000;
@@ -257,13 +265,14 @@ export default class Game {
 
         this.incrementDeathCount();
 
-
+        this.active = false;
         this.menu.setMenuData("failed",this.worldNum, this.levelNum);
         this.menu.open();
     }
 
     levelComplete(gameLoop) {
         // set new levelsCompleted localStorage variable
+        this.active = false;
         let current = window.localStorage.getItem("levelsCompleted");
         if (current) {
             window.localStorage.setItem("levelsCompleted", parseInt(current) + 1);

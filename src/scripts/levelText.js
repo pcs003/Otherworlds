@@ -16,6 +16,13 @@ export default class LevelText {
         this.textColor = 'rgba(255,255,255,1)';
         this.bgColor = 'rgba(0,0,0,0.6)'
 
+        this.textTimeout = null;
+        this.fadeInLoop = null;
+        this.fadeOutLoop = null;
+        this.fadeTimeout = null;
+
+        this.active = false;
+
         let words = this.message.split(" ")
         let len = words.length;
         this.segments = [];
@@ -35,18 +42,31 @@ export default class LevelText {
         }
         this.segments.push(segment)
         this.y = this.canvas.height/2 - this.segments.length * 8;
+
+        window.addEventListener("keydown", e => {
+            if (e.key == "Escape" && this.active) {
+                console.log("levelText.js")
+                e.preventDefault();
+                this.active = false;
+                clearTimeout(this.textTimeout)
+                clearTimeout(this.fadeTimeout)
+                clearInterval(this.fadeInLoop)
+                clearInterval(this.fadeOutLoop)
+                this.close();
+            }
+        })
     }
 
     fadeIn() {
-        setTimeout( () => {
-            clearInterval(fadeInLoop)
+        this.textTimeout = setTimeout( () => {
+            clearInterval(this.fadeInLoop)
             this.render();
-            setTimeout(() => {
+            this.fadeTimeout = setTimeout(() => {
                 this.fadeOut();
             }, 3000)
         }, 1000)
         let count = 0;
-        let fadeInLoop = setInterval(() => {
+        this.fadeInLoop = setInterval(() => {
             count++;
             let textOpacity = count / 100;
             let bgOpacity = count * 0.6 / 100;
@@ -57,12 +77,13 @@ export default class LevelText {
     }
 
     fadeOut() {
-        setTimeout( () => {
-            clearInterval(fadeOutLoop)
+        this.textTimeout = setTimeout( () => {
+            clearInterval(this.fadeOutLoop)
             this.close();
+            this.active = false;
         }, 1000)
         let count = 0;
-        let fadeOutLoop = setInterval(() => {
+        this.fadeOutLoop = setInterval(() => {
             count++;
             let textOpacity = 1 - (count / 100);
             let bgOpacity = 0.6 - (count * 0.6 / 100);
@@ -74,6 +95,7 @@ export default class LevelText {
     }
 
     open() {
+        this.active = true;
         this.canvas.classList.add("active")
         this.fadeIn();
     }

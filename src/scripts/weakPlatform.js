@@ -13,7 +13,6 @@ export default class WeakPlatform extends Interactable{
     }
 
     fall() {
-        console.log("started flal function")
         this.isFalling = true;
         setTimeout( () => {
             clearInterval(platformFall);

@@ -114,7 +114,6 @@ export default class HomePage {
             //     this.render();
             // }
             // if (mouseX > 750 && mouseX < 800 && mouseY > 450 && mouseY < 500) {
-            //     console.log("here")
             //     for (let i = 1; i <= this.numWorlds; i++) {
             //         for (let j = 1; j <= 5; j++) {
             //             window.localStorage.setItem(`${i}-${j} best time`, 0);

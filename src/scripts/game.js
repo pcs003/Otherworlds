@@ -115,7 +115,6 @@ export default class Game {
                 }
                 
             } else if (event.key == "Escape" && this.active) {
-                console.log("game.js")
                 this.pauseSound.pause();
                 this.pauseSound.currentTime = 0;
                 if (!this.getSoundMuted()) this.pauseSound.play();
@@ -245,8 +244,7 @@ export default class Game {
 
     checkBestTime() {
         let current = window.localStorage.getItem(`${this.worldNum}-${this.levelNum} best time`);
-        console.log(current)
-        console.log(this.levelTime)
+
         if (current == null) {
             window.localStorage.setItem(`${this.worldNum}-${this.levelNum} best time`, this.levelTime);
             return true;
@@ -382,7 +380,6 @@ export default class Game {
                 if (interactable.isCollidingY(this.Player.x + this.Player.width/2 + this.Player.velocity[0], this.Player.y + this.Player.height/2 + this.Player.velocity[1])) {
                     if (interactable.fall && !interactable.isFalling) {
                         interactable.fall();
-                        console.log("fall")
                     }
                     this.Player.collidingY = true;
                     this.Player.grounded = true;

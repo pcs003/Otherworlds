@@ -45,7 +45,6 @@ export default class LevelText {
 
         window.addEventListener("keydown", e => {
             if (e.key == "Escape" && this.active) {
-                console.log("levelText.js")
                 e.preventDefault();
                 this.active = false;
                 clearTimeout(this.textTimeout)

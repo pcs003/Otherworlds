@@ -130,13 +130,15 @@ export default class GameMenu {
                                 
                             } else {
                                 this.setGameData(this.worldNum + 1, 1, this.game);
+                                this.renderGame();
                             }
                             
                         } else {
                             this.setGameData(this.worldNum, this.levelNum + 1, this.game);
+                            this.renderGame();
                         }
                         
-                        this.renderGame();
+                        
                     } else if (this.selected == 2) {
                         this.renderHome();
                         

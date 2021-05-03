@@ -1,6 +1,6 @@
 import Interactable from "./interactable";
 
-
+// weak platform class that is a child of interactable and is a platform that falls after interaction
 export default class WeakPlatform extends Interactable{
     constructor(canvas, ctx, x, y, height, width, duration, imgUrl, gravity) {
         super(canvas, ctx, x, y, height, width);

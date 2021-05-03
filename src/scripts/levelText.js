@@ -1,5 +1,5 @@
 
-
+// LevelText component for text that appears at beginning of level
 export default class LevelText {
     constructor(canvas, ctx, message, x, y) {
         this.mainCanvas = canvas
